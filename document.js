@@ -3,7 +3,7 @@
  * Adds document navigation to a page.
  */
 
-	// fix HTML5 in IE 
+	// fix HTML5 in IE
 	(function(){
 		var a = "header,section,datalist,option".split(",");
 		for( var x in a ){
@@ -12,6 +12,9 @@
 			}
 		}
 	})();
+
+	//
+	$('script:first').after('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />');
 
 	// on ready
 	$(function(){
@@ -31,7 +34,8 @@
 			if (!html) {
 				html = $(this).html();
 			}
-			// 
+
+			//
 			html = html.replace(' class="demo"','');
 			
 			// remove any unwanted sections
