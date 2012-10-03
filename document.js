@@ -114,7 +114,12 @@
 			});
 		});
 
-		$('body').append('<author>By Andrew Dodson (@mr_switch)');
+		var repo = (window.location.pathname||'').match(/[^\/]+/);
+		if(repo){
+			repo = "https://github.com/MrSwitch/"+repo[0]+"";
+		}
+
+		$('body').append('<footer>Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a> (@mr_switch) '+ (repo?'[<a href="'+repo+'">Source and Comments on GitHub</a>]':'') +'</footer>');
 	});
 
 
