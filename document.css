@@ -262,7 +262,8 @@ table{
 		top:0;
 		color:white;
 		margin-left:-260px;
-		width:200px;
+		max-width:200px;
+		width:auto;
 		text-align:right;
 		font-weight:bold;
 		z-index:-1;
@@ -312,10 +313,31 @@ table{
 	}
 @media all and (max-width: 1400px) {
 	nav.toc{
-		position:static;
-		margin-left:0;
+		position: fixed;
+		left:50%;
+		margin-left: 0;
 		color:inherit;
 		text-align:left;
+	
+		top: 0;
+		z-index: 0;
+		background-color: white;
+		padding: 10px;
+		border: 1px solid #ccc;
+		box-shadow: -1px 1px 5px #ccc;
+		max-height:100%;
+	}
+	nav.toc:before{
+		content:"[TOC]";
+	}
+	nav.toc ul{
+		display: none;
+	}
+	nav.toc:hover{
+		overflow:auto;
+	}
+	nav.toc:hover ul{
+		display: block;
 	}
 	nav.toc li a,
 	nav.toc li a:hover,
