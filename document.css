@@ -12,38 +12,11 @@ html{
 	    max-width: 1156px;
 	    background-color: #FFFFFF;
 	    color: #4E5260;
-	    font-size: 1em;
+	    font-size: 0.9em;
 	    position:relative;
 	}
-		header{
-		}
-			header p{
-				font-size:1.4em;
-			}
-		
-		h1{
-			font-size:8em;
-			letter-spacing:-5px;
-			margin:0;
-			line-height:1em;
-		}
-		h2{
-			margin-top:50px;
-			font-size:3em;
-		}
-		h2 + p{
-			font-size:1.5em;
-			margin-top:-30px;
-		}
-
-		h3{
-			font-size:2em;
-		}
-
-
 		button{
 			padding:5px;
-			font-size:1.2em;
 		}
 
 
@@ -83,13 +56,11 @@ i{
 		padding:4px;
 	}
 	header{
-		font-size:70%;
 	}
 
 
 	pre{
 		overflow-x:auto;
-		font-size: 90%;
 	}
 
 }
