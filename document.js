@@ -31,6 +31,9 @@
 						return h;
 					})(this);
 			}
+			else{
+				return;
+			}
 			if (!html) {
 				html = $(this).html();
 			}
@@ -110,6 +113,8 @@
 				}
 			});
 		});
+
+		$('body').append('<author>By Andrew Dodson (@mr_switch)');
 	});
 
 
