@@ -317,6 +317,7 @@ table{
 		color:white;
 		color:rgba(255,255,255,0.9);
 	}
+
 @media all and (max-width: 1400px) {
 	nav.toc{
 		position: fixed;
@@ -352,5 +353,14 @@ table{
 	nav.toc li li li a,
 	nav.toc li li li a:hover{
 		color:inherit;
+	}
+}
+
+/**
+ * Really small screens
+ */
+@media all and (max-width: 400px){
+	ul{
+		padding-left: 20px;
 	}
 }
