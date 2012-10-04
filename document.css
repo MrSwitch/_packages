@@ -30,11 +30,6 @@ html{
 
 
 
-@media all and (max-width: 1000px) {
-	body{
-		padding:10px;
-	}
-}
 
 
 
@@ -44,6 +39,10 @@ blockquote{
 	padding: 15px;
 	margin: 0 0 35px 0;	
 }
+	blockquote p{
+		line-height: auto;
+	}
+
 
 q{
 	color:green;
@@ -52,6 +51,20 @@ i{
 	color:blue;
 }
 
+
+
+
+
+
+
+
+
+
+@media all and (max-width: 1000px) {
+	body{
+		padding:10px;
+	}
+}
 
 @media all and (max-width: 650px), screen and (max-device-width: 480px) {
 	*{
@@ -235,7 +248,8 @@ table{
 	}
 
 	td,th{
-		border:1px solid #D2D2D2;
+		border-right:1px solid #D2D2D2;
+		border-bottom:1px solid #D2D2D2;
 		padding:4px 10px 4px 6px;
 		vertical-align: top;
 	}
@@ -245,19 +259,21 @@ table{
 			background-color:transparent;
 			border:none;
 		}
-	td.yes,span.yes{
-		background-color:#00882D;
+
+	td.yes, span.yes{
+		background:url(images/supported.png) no-repeat center center;
 	}
-	td.no,span.no{
-		background-color:#CB000F;
-	}
+	
+	tbody th{
+		text-align:left;
+		padding-left:10px;
+	} 
+		tbody th p{
+			font-weight:normal;
+		}
+
 	td.partial,span.partial{
 		background-color:#20A84D;
-	}
-	td.no, td.yes,td.partial,
-	span.no, span.yes,span.partial{
-		color:white;
-		text-align:center;
 	}
 
 

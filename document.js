@@ -57,7 +57,13 @@
 			var pre = this;
 			$("<button class=tryit>tryit</button>")
 				.click(function(){
-						setTimeout( function(){ eval(pre.innerText); }, 100);
+
+						if(typeof(tryit)==='function'&&!tryit(pre.innerText)){
+							return
+						}else{
+							setTimeout( function(){ eval(pre.innerText); }, 100);
+						}
+
 					})
 				.attr('contenteditable',true)
 				.insertAfter(pre);
