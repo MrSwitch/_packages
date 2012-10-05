@@ -3,6 +3,8 @@
  * Adds document navigation to a page.
  */
 
+
+
 	// fix HTML5 in IE
 	(function(){
 		var a = "header,section,datalist,option".split(",");
@@ -13,8 +15,17 @@
 		}
 	})();
 
-	//
-	$('script:first').after('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />');
+	// Add mobile ag to page.
+
+	// Insert Meta Tag
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(create('meta',{
+		name:'viewport',
+		content:'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
+	}), s);
+	//$('script:first').after('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />');
+
+
 
 	// on ready
 	$(function(){
@@ -167,3 +178,44 @@
 		.end()
 		.appendTo($log);
 	}
+
+	//
+	// Create and Append new Dom elements
+	// @param node string
+	// @param attr object literal
+	// @param dom/string 
+	//
+	function create(node,attr){
+
+		var n = typeof(node)==='string' ? document.createElement(node) : node;
+
+		if(typeof(attr)==='object' ){
+			if( "tagName" in attr ){
+				target = attr;
+			}
+			else{
+				for(var x in attr){if(attr.hasOwnProperty(x)){
+					if(typeof(attr[x])==='object'){
+						for(var y in attr[x]){if(attr[x].hasOwnProperty(y)){
+							n[x][y] = attr[x][y];
+						}}
+					}
+					else{
+						n.setAttribute(x, attr[x]);
+					}
+				}}
+			}
+		}
+		return n;
+	}
+
+	// Google Analytics
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-35317561-1']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
