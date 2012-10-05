@@ -25,6 +25,20 @@ s.parentNode.insertBefore(create('meta',{
 }), s);
 
 
+// Insert on Document Load
+addEvent(document, "DOMContentLoaded", function(){
+
+	var repo = (window.location.pathname||'').match(/[^\/]+/);
+	if(repo){
+		repo = "https://github.com/MrSwitch/"+repo[0]+"";
+	}
+
+	document.body.appendChild(create('footer',{
+			html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a> (@mr_switch) '+ (repo?'[<a href="'+repo+'">Source and Comments on GitHub</a>]':'')
+		}
+	));
+});
+
 
 // TOC and demos events
 if(typeof(jQuery)!=='undefined'){
@@ -138,7 +152,7 @@ if(typeof(jQuery)!=='undefined'){
 			repo = "https://github.com/MrSwitch/"+repo[0]+"";
 		}
 
-		$('body').append('<footer>Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a> (@mr_switch) '+ (repo?'[<a href="'+repo+'">Source and Comments on GitHub</a>]':'') +'</footer>');
+		//$('body').append('<footer>Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a> (@mr_switch) '+ (repo?'[<a href="'+repo+'">Source and Comments on GitHub</a>]':'') +'</footer>');
 	});
 
 
@@ -205,6 +219,9 @@ function create(node,attr){
 						n[x][y] = attr[x][y];
 					}}
 				}
+				else if(x === 'html'){
+					n.innerHTML = attr[x];
+				}
 				else{
 					n.setAttribute(x, attr[x]);
 				}
@@ -212,6 +229,14 @@ function create(node,attr){
 		}
 	}
 	return n;
+}
+
+function addEvent(obj, eventName, listener) { //function to add event
+	if (obj.addEventListener) {
+		obj.addEventListener(eventName, listener, false);
+	} else {
+		obj.attachEvent("on" + eventName, listener);
+	}
 }
 
 // Google Analytics
