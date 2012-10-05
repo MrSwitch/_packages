@@ -27,7 +27,7 @@ s.parentNode.insertBefore(create('meta',{
 
 
 // TOC and demos events
-if(jQuery){
+if(typeof(jQuery)!=='undefined'){
 
 	// on ready
 	$(function(){
