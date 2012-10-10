@@ -123,7 +123,7 @@ script.pre:not(:empty):before{
 	color:#a4a4a5;
 }
 style.pre:not(:empty):before{
-	content:"// CSS stylesheet";
+	content:"/* CSS stylesheet */";
 	color:#a4a4a5;
 }
 
