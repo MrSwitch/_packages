@@ -36,25 +36,45 @@
 			}
 		));
 
+
+		function tryitButton(pre,func){
+			var btn = create('button',{html:'tryit',class:'tryit'});
+			insertAfter(btn, pre);
+
+			addEvent(btn, 'click', function(){
+				if(func){
+					func();
+				}
+				else if(typeof(tryit)==='function'&&!tryit(pre.innerText)){
+					return
+				}else{
+					setTimeout( function(){ eval(pre.innerText); }, 100);
+				}
+			});
+
+			if(!func){
+				pre.setAttribute('contenteditable', true);
+			}
+		}
+
+
 		// TryIt
 		var pres = document.getElementsByTagName('pre');
 		for(var i=0;i<pres.length;i++){
 			if(pres[i].className === 'tryit'||pres[i].className === 'tryitoffline'){
 				// Create a button and insert it after the pre tag
-				(function(pre){
-					var btn = create('button',{html:'tryit',className:'tryit'});
-					insertAfter(btn, pre);
+				tryitButton(pres[i]);
+			}
+		}
 
-					addEvent(btn, 'click', function(){
-						if(typeof(tryit)==='function'&&!tryit(pre.innerText)){
-							return
-						}else{
-							setTimeout( function(){ eval(pre.innerText); }, 100);
-						}
-					});
+		// TryIt
+		var pres = document.getElementsByTagName('script');
+		for(var i=0;i<pres.length;i++){
+			var func = pres[i].getAttribute('data-tryit');
 
-					pre.setAttribute('contenteditable', true);
-				})(pres[i]);
+			if(func){
+				// Create a button and insert it after the pre tag
+				tryitButton(pres[i],window[func]);
 			}
 		}
 

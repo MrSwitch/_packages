@@ -122,9 +122,16 @@ script.pre:not(:empty):before{
 	content:"// javascript";
 	color:#a4a4a5;
 }
+style.pre:not(:empty):before{
+	content:"// CSS stylesheet";
+	color:#a4a4a5;
+}
 
 script.pre:empty:after{
 	content:"<script src='" attr(src) "'></script>";
+}
+link.pre:empty:after{
+	content:"<link href='" attr(href) "' rel='stylesheet'/>";
 }
 
 pre[title].before,.pre[title]:before{
@@ -144,14 +151,14 @@ pre[contenteditable]:focus{
 	color:black;
 	background-color:white;
 }
-pre + button{
+pre + button,.pre + button{
 	margin-top:-60px;
 	position:absolute;
 	background:rgb(78,81,96);
 	border:none;
 	color:white;
 }
-pre + button:active{
+pre + button:active,.pre + button:active{
 	background:rgb(98,101,116);
 }
 pre.tryit, pre.tryitoffline{
