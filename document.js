@@ -6,7 +6,7 @@
 (function(){
 
 	// fix HTML5 in IE
-	var a = "header,section,datalist,option".split(",");
+	var a = "header,section,datalist,option,footer,article,style,script".split(",");
 	for( var i=0;i<a.length;i++){
 		document.createElement(a[i]);
 	}
@@ -38,7 +38,7 @@
 
 
 		function tryitButton(pre,func){
-			var btn = create('button',{html:'tryit',class:'tryit'});
+			var btn = create('button',{html:'tryit','class':'tryit'});
 			insertAfter(btn, pre);
 
 			addEvent(btn, 'click', function(){

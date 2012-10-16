@@ -123,15 +123,15 @@ script.pre:not(:empty):before{
 	content:"// javascript";
 	color:#a4a4a5;
 }
-style.pre:not(:empty):before{
+style.pre:before{
 	content:"/* CSS stylesheet */";
 	color:#a4a4a5;
 }
 
-script.pre:empty:after{
+script.pre[src]:after{
 	content:"<script src='" attr(src) "'></script>";
 }
-link.pre:empty:after{
+link.pre:after{
 	content:"<link href='" attr(href) "' rel='stylesheet'/>";
 }
 
@@ -145,7 +145,7 @@ pre[title].before,.pre[title]:before{
 }
 
 pre:empty:before{
-	content: "Loading...";
+	content: "waiting for it";
 }
 
 pre[contenteditable]:focus{
