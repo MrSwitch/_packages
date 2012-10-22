@@ -27,13 +27,6 @@ html{
 		}
 
 
-
-
-
-
-
-
-
 blockquote{
 	background-color: #F5F7F5;
 	border: 1px solid #CCC;
@@ -51,11 +44,6 @@ q{
 i{
 	color:blue;
 }
-
-
-
-
-
 
 
 
@@ -90,13 +78,6 @@ i{
 
 }
 
-
-
-a.restexplorer{
-	text-decoration:underline;
-	color:blue;
-	font-family:monospace;
-}
 
 .hide{
 	display:none;
@@ -145,7 +126,8 @@ pre[title].before,.pre[title]:before{
 }
 
 pre:empty:before{
-	content: "waiting for it";
+	content: "[waiting for it]";
+	color:#4E5160;
 }
 
 pre[contenteditable]:focus{
@@ -195,40 +177,6 @@ pre .atv { color: #080; }
 pre .dec { color: #606; }
 
 
-
-/**
- * REST EXPOLORER
- */
-input[name=path]{
-	display:block;
-	width:100%;
-	padding:5px;
-	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	font-size:20px;
-	margin:0;
-	border:1px solid #e4e4e4;
-	border-top-width:10px;
-}
-article{
-	display:-moz-box; /* Firefox */
-	display:-webkit-box; /* Safari and Chrome */
-	display:box;
-	border:1px solid #e4e4e4;
-}
-	article > nav ul, 
-	article > nav ul li{
-		margin:0;
-		padding:10px;
-		list-style:none;
-	}
-	article > pre{
-		-moz-box-flex:1.0; /* Firefox */
-		-webkit-box-flex:1.0; /* Safari and Chrome */
-		box-flex:1.0;
-		margin:0;
-	}
 
 
 

@@ -167,50 +167,6 @@
 		}
 	});
 
-
-	// TOC and demos events
-	if(typeof(jQuery)!=='undefined'){
-
-		/**
-		 * Dump the response from the server after a given element
-		 */
-		function dump(r,target){
-			var $log = $('<pre />');
-			
-			//console.log('Dump');
-			
-			if($(target).get(0).tagName !== 'PRE'){
-				if( $(target).next().get(0).tagName === 'PRE' ){
-					$log = $(target).next();
-				}
-				else {
-					$(target).after($log);
-				}
-			}else{
-				$log = $(target);
-			}
-
-			var i=0;
-			$((function drilldown(name, json){
-				var link;
-				if(typeof(json)!=='object'||json===null||json.length==0){ 
-					return '<b>'+name + '<\/b>: <span class="'+ typeof(json) +'">' + json + '<\/span>';
-				}
-				var s='';
-				for ( var x in json ){
-					s += '<li>'+drilldown(x,json[x])+'<\/li>';
-				}
-				return '<div><a href="javascript:void(0);" class="toggle">'+ name +'</a>: <ul class="hide">' + s + '<\/ul></div>';
-			})(typeof(r),r))
-			.find('a.toggle')
-			.click(function(){
-				$(this).next('ul').toggleClass("hide");
-			})
-			.end()
-			.appendTo($log);
-		}
-	}
-
 	//
 	// Insert After
 	function insertAfter(el,ref){
