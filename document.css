@@ -152,6 +152,22 @@ pre[contenteditable]:focus{
 	color:black;
 	background-color:white;
 }
+pre[contenteditable]{
+	position:relative;
+}
+pre[contenteditable]:after{
+	content:"edit";
+	position:absolute;
+	top:0;
+	right:0;
+	color:red;
+	background-color:#E4E4E4;
+	padding:0 10px;
+}
+pre[contenteditable]:focus:after{
+	background-color:white;
+}
+
 pre + button,.pre + button{
 	margin-top:-60px;
 	position:absolute;
