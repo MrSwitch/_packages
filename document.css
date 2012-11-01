@@ -233,10 +233,13 @@ table{
 	}
 
 	td,th{
-		border-right:1px solid #D2D2D2;
+		text-align:left;
 		border-bottom:1px solid #D2D2D2;
 		padding:4px 10px 4px 6px;
 		vertical-align: top;
+	}
+	thead td,th{
+		border-bottom-width:3px;
 	}
 		table td pre{
 			margin:0;
@@ -250,9 +253,11 @@ table{
 	}
 	
 	tbody th{
-		text-align:left;
 		padding-left:10px;
 	} 
+	thead + tbody tr th, tbody tr:not(:first-child) th{
+		border-bottom-width:1px;
+	}
 		tbody th p{
 			font-weight:normal;
 		}
