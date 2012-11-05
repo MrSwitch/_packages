@@ -248,9 +248,24 @@ table{
 			border:none;
 		}
 
-	td.yes, span.yes{
-		background:url(images/supported.png) no-repeat center center;
-	}
+		td.yes, td.no{
+			vertical-align: middle;
+		}
+		.yes:before, .no:before{
+			color:white;
+			text-transform:uppercase;
+			display: inline-block;
+			border-radius:5px;
+			padding:3px 10px;
+		}
+		.yes:before{
+			content:"\02713";
+			background-color:#10A54A;
+		}
+		.no:before{
+			content:"\000D7";
+			background-color:red;
+		}
 	
 	tbody th{
 		padding-left:10px;
