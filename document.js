@@ -67,15 +67,38 @@
 			}
 		}
 
-		// TryIt
+		// TryIt, View
 		var pres = document.getElementsByTagName('script');
 		for(var i=0;i<pres.length;i++){
-			var func = pres[i].getAttribute('data-tryit');
+			(function(script){
+				var func = script.getAttribute('data-tryit');
 
-			if(func){
-				// Create a button and insert it after the pre tag
-				tryitButton(pres[i],window[func]);
-			}
+				if(func){
+					// Create a button and insert it after the pre tag
+					tryitButton(script,window[func]);
+				}
+
+				if(script.getAttribute('src')){
+
+					// Add click event to open in new window
+					addEvent(script, 'click', function(){
+						window.open(script.getAttribute('src'), '_blank');
+					});
+				}
+			})(pres[i]);
+		}
+
+		var pres = document.getElementsByTagName('link');
+		for(var i=0;i<pres.length;i++){
+			(function(script){
+				if(script.getAttribute('href')){
+
+					// Add click event to open in new window
+					addEvent(script, 'click', function(){
+						window.open(script.getAttribute('href'), '_blank');
+					});
+				}
+			})(pres[i]);
 		}
 
 

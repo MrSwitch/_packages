@@ -9,6 +9,7 @@ html{
 	body{
 	    font-family: arial;
 	    margin: 0 auto;
+	    margin-bottom:10px;
 	    padding: 35px 50px 15px 50px;
 	    max-width: 1024px;
 	    background-color: #FFFFFF;
@@ -20,19 +21,20 @@ html{
 		button{
 			padding:5px;
 		}
-		footer{
-			margin-top:50px;
-			border-top:1px solid #CCC;
-			padding-top:10px;
-		}
 
 
-blockquote{
+blockquote, footer{
 	background-color: #F5F7F5;
 	border: 1px solid #CCC;
-	padding: 15px;
-	margin: 0 0 35px 0;	
+	padding: 15px 55px;
+	margin: 0 -55px 35px -55px;	
+	text-align: justify;
 }
+	footer{
+		margin-top:50px;
+		margin-bottom:0;
+	}
+
 	blockquote p{
 		line-height: auto;
 	}
@@ -52,6 +54,10 @@ i{
 @media all and (max-width: 1000px) {
 	body{
 		padding:10px;
+	}
+	blockquote{
+		padding:10px;
+		margin:0;
 	}
 }
 
@@ -109,6 +115,12 @@ style.pre:before{
 	color:#a4a4a5;
 }
 
+script.pre[src], link.pre[href]{
+	cursor: pointer;
+}
+script.pre[src]:hover, link.pre[href]:hover{
+	text-decoration: underline;
+}
 script.pre[src]:after{
 	content:"<script src='" attr(src) "'></script>";
 }
