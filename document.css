@@ -19,16 +19,24 @@ html{
 	    line-height: 1.6em;
 	}
 		button{
-			padding:5px;
+			padding:10px;
+			/*
+			display: inline-block;
+			border:0;
+			padding:10px;
+			border-radius:5px;
+			font-size:1em;
+			background-color: #10A54A;
+			color:white;*/
 		}
-
 
 blockquote, footer{
 	background-color: #F5F7F5;
 	border: 1px solid #CCC;
-	padding: 15px 55px;
-	margin: 0 -55px 35px -55px;	
+	padding: 15px 60px;
+	margin: 0 -60px 35px -60px;	
 	text-align: justify;
+	position: relative;
 }
 	footer{
 		margin-top:50px;
@@ -36,8 +44,41 @@ blockquote, footer{
 	}
 
 	blockquote p{
-		line-height: auto;
+		line-height: normal;
 	}
+
+
+blockquote:after,footer:after,
+blockquote:before,footer:before{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	top: 100%;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent;
+}
+blockquote:after{
+	border-color: #aaa #aaa transparent transparent;
+	left: -1px;
+}
+blockquote:before{
+	border-color: #aaa transparent transparent #aaa;
+	right: -1px;
+}
+footer:after{
+	border-color: transparent #aaa #aaa transparent;
+	top:-11px;
+	left: -1px;
+}
+footer:before{
+	top:-11px;
+	border-color: transparent transparent #aaa #aaa;
+	right: -1px;
+}
+
+
 
 
 q{
@@ -271,11 +312,11 @@ table{
 			padding:3px 10px;
 		}
 		.yes:before{
-			content:"\02713";
+			content:"\02714";
 			background-color:#10A54A;
 		}
 		.no:before{
-			content:"\000D7";
+			content:"\02716";
 			background-color:red;
 		}
 	
