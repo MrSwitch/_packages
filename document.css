@@ -59,13 +59,21 @@ blockquote:before,footer:before{
 	border-style: solid;
 	border-color: transparent;
 }
+blockquote{
+	box-shadow: 0px 8px 5px -5px #aaa;
+}
 blockquote:after{
+	margin-top: 1px;
 	border-color: #aaa #aaa transparent transparent;
 	left: -1px;
 }
 blockquote:before{
+	margin-top: 1px;
 	border-color: #aaa transparent transparent #aaa;
 	right: -1px;
+}
+footer{
+	box-shadow: 0px -8px 5px -5px #aaa;
 }
 footer:after{
 	border-color: transparent #aaa #aaa transparent;
@@ -77,6 +85,7 @@ footer:before{
 	border-color: transparent transparent #aaa #aaa;
 	right: -1px;
 }
+
 
 
 
