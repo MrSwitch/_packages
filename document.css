@@ -72,6 +72,7 @@ blockquote:before{
 	border-color: #aaa transparent transparent #aaa;
 	right: -1px;
 }
+
 footer{
 	box-shadow: 0px -8px 5px -5px #aaa;
 }
@@ -87,6 +88,38 @@ footer:before{
 }
 
 
+
+/**
+ * FORM
+ */
+body > form{
+	margin:0 -60px;
+	padding:60px;
+	margin-right:0px;
+	background-color: rgb(255, 232, 223);
+	box-shadow:0 10px 10px -10px black;;
+	position: relative;
+}
+body > form > h2,
+body > form > h3,
+body > form > h4{
+	margin-top:0;
+	padding-top:0;
+}
+
+body > form:after{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	top: 100%;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent;
+	margin-top: 0;
+	border-color: #aaa #aaa transparent transparent;
+	left: 0;
+}
 
 
 
