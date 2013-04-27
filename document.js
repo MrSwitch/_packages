@@ -125,7 +125,7 @@
 				text = (tag.innerText||tag.innerHTML),
 				ref = text.replace(/\W/ig,'');
 
-			var li = create('li', {html:'<a href="#'+ ref +'">'+ text +'</a>', id : "toc_"+ref});
+			var li = create('li', {html: create('a', {href:"#" +ref, text: text }), id : "toc_"+ref});
 
 			if(last_depth < depth){
 				var ul = create('ul');
@@ -212,15 +212,24 @@
 			}
 			else{
 				for(var x in attr){if(attr.hasOwnProperty(x)){
-					if(typeof(attr[x])==='object'){
+
+					if(x === 'text'){
+						n.appendChild(document.createTextNode(attr[x]));
+					}
+					else if(x === 'html'){
+						if(typeof(attr[x])==='string'){
+							n.innerHTML = attr[x];
+						}
+						else{
+							n.appendChild(attr[x]);
+						}
+					}
+					else if(typeof(attr[x])==='object'){
 						for(var y in attr[x]){if(attr[x].hasOwnProperty(y)){
 							n[x][y] = attr[x][y];
 						}}
 					}
-					else if(x === 'html'){
-						n.innerHTML = attr[x];
-					}
-					else{
+					else {
 						n.setAttribute(x, attr[x]);
 					}
 				}}
