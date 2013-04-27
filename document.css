@@ -1,22 +1,40 @@
-﻿* {
+﻿@import url(http://fonts.googleapis.com/css?family=Lato:300);
+
+* {
 	box-sizing:border-box;
 	-moz-box-sizing:border-box;
 }
 
 html{
-    background-color: #4E5160;
+    background-color: rgb(218, 219, 228);
+    font-size:14px;
+    font-weight:300;
+    background-attachment: fixed;
 }
+
+
+/*
+html,
+blockquote,
+footer,
+body > form{
+	background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50px), linear-gradient(0, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0) 50px);
+	background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50px), linear-gradient(0, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0) 50px),radial-gradient(closest-side, rgba(0, 0, 0, 0) 98%, rgba(0, 0, 0, 0.02 ) 99%),radial-gradient(closest-side, rgba(0, 0, 0, 0) 98%, rgba(0, 0, 0, .02) 99%);
+	background-size: 100%, 100%, 8px, 8px 8px;
+	background-position: 0 0, 0 0, 15px 6px;
+}
+*/
 	body{
-	    font-family: arial;
+		border: 1px solid rgb(201, 202, 202);
+	    font-family: 'Lato', sans-serif;
 	    margin: 0 auto;
 	    margin-bottom:10px;
 	    padding: 35px 50px 15px 50px;
 	    max-width: 1024px;
 	    background-color: #FFFFFF;
 	    color: #4E5260;
-	    font-size: 0.9em;
 	    position:relative;
-	    line-height: 1.6em;
+	    line-height: 2;
 	}
 		button{
 			padding:10px;
@@ -31,7 +49,8 @@ html{
 		}
 
 blockquote, footer{
-	background-color: #F5F7F5;
+	background-color: rgb(247, 73, 73);
+	color:white;
 	border: 1px solid #CCC;
 	padding: 15px 60px;
 	margin: 0 -60px 35px -60px;	
@@ -44,12 +63,12 @@ blockquote, footer{
 	}
 
 	blockquote p{
-		line-height: normal;
+		line-height: inherit;
 	}
 
 
-blockquote:after,footer:after,
-blockquote:before,footer:before{
+blockquote:after,footer:after,body > form:after,
+blockquote:before,footer:before,body > form:before{
 	content: ' ';
 	position: absolute;
 	width: 0;
@@ -60,21 +79,21 @@ blockquote:before,footer:before{
 	border-color: transparent;
 }
 blockquote{
-	box-shadow: 0px 8px 5px -5px #aaa;
+	box-shadow: 0 8px 5px -5px #aaa;
 }
-blockquote:after{
+blockquote:after, body > form:after{
 	margin-top: 1px;
 	border-color: #aaa #aaa transparent transparent;
 	left: -1px;
 }
-blockquote:before{
+blockquote:before, body > form:before{
 	margin-top: 1px;
 	border-color: #aaa transparent transparent #aaa;
 	right: -1px;
 }
 
 footer{
-	box-shadow: 0px -8px 5px -5px #aaa;
+	box-shadow: 0 -8px 5px -5px #aaa;
 }
 footer:after{
 	border-color: transparent #aaa #aaa transparent;
@@ -87,17 +106,36 @@ footer:before{
 	right: -1px;
 }
 
+/** Anchor elements aimed to link hashtags, respect size of following element for which they refer */
+a[name]{
+	/*	display: inline-block; */
+}
 
+a{
+	color:inherit;
+}
+
+h1,h2,h3,h4{
+	font-weight:300;
+	text-indent:40px;
+}
+
+h2{
+	border-bottom: 1px solid #dcdcdc;
+	margin: 1.5em -50px;
+	background: rgb(82, 176, 250);
+	color: rgb(255, 255, 255);
+	text-indent: 90px;
+}
 
 /**
  * FORM
  */
 body > form{
-	margin:0 -60px;
-	padding:60px;
-	margin-right:0px;
-	background-color: rgb(255, 232, 223);
-	box-shadow:0 10px 10px -10px black;;
+	margin:0 -60px 20px;
+	padding:20px 60px;
+	background-color: rgb(156, 250, 82);
+	box-shadow: 0 10px 10px -10px rgb(0, 0, 0);
 	position: relative;
 }
 body > form > h2,
@@ -106,21 +144,6 @@ body > form > h4{
 	margin-top:0;
 	padding-top:0;
 }
-
-body > form:after{
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-	top: 100%;
-	border-width: 5px;
-	border-style: solid;
-	border-color: transparent;
-	margin-top: 0;
-	border-color: #aaa #aaa transparent transparent;
-	left: 0;
-}
-
 
 
 q{
@@ -138,9 +161,13 @@ i{
 	body{
 		padding:10px;
 	}
-	blockquote{
+	blockquote,footer,body>form{
 		padding:10px;
 		margin:0;
+	}
+	h2{
+		margin-left:0;
+		margin-right:0;
 	}
 }
 
@@ -190,7 +217,12 @@ pre,.pre{
 	max-width:100%;
 }
 script.pre:not(:empty):before{
-	content:"// javascript";
+	content:"<script>";
+	color:#a4a4a5;
+}
+script.pre:not(:empty):after{
+	display: block;
+	content:"</script>";
 	color:#a4a4a5;
 }
 style.pre:before{
@@ -382,14 +414,12 @@ table{
 	nav.toc{
 		position:fixed;
 		top:0;
-		color:white;
 		margin-left:-260px;
 		max-width:200px;
 		width:auto;
 		text-align:right;
-		font-weight:bold;
+		font-weight:300;
 		z-index:-1;
-		font-size:100%;
 
 	}
 	nav.toc ul{
@@ -410,7 +440,7 @@ table{
 		top:0;
 		border:10px solid transparent;
 		border-left-width:0;
-		border-right-color:white;
+		border-right-color:inherit;
 		border-right-width:5px;
 	}
 
@@ -420,7 +450,6 @@ table{
 	nav.toc li li li a{
 		font-size:80%;
 		font-weight:normal;
-		color:rgba(255,255,255,0.8);
 	}
 	nav.toc a{
 		color:inherit;
@@ -443,7 +472,7 @@ table{
 		text-align:left;
 	
 		top: 0;
-		z-index: 0;
+		z-index: 1;
 		background-color: white;
 		padding: 10px;
 		border: 1px solid #ccc;
