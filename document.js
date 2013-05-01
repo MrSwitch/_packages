@@ -24,6 +24,8 @@
 	// Insert on Document Load
 	addEvent(document, "DOMContentLoaded", function(){
 
+		var pres, i;
+
 		var repo = (window.location.pathname||'').match(/[^\/]+/);
 		if(repo){
 			repo = "https://github.com/MrSwitch/"+repo[0]+"";
@@ -46,7 +48,7 @@
 					func();
 				}
 				else if(typeof(tryit)==='function'&&!tryit(pre.innerText)){
-					return
+					return;
 				}else{
 					setTimeout( function(){ eval(pre.innerText); }, 100);
 				}
@@ -59,8 +61,8 @@
 
 
 		// TryIt
-		var pres = document.getElementsByTagName('pre');
-		for(var i=0;i<pres.length;i++){
+		pres = document.getElementsByTagName('pre');
+		for(i=0;i<pres.length;i++){
 			if(pres[i].className === 'tryit'||pres[i].className === 'tryitoffline'){
 				// Create a button and insert it after the pre tag
 				tryitButton(pres[i]);
@@ -68,8 +70,8 @@
 		}
 
 		// TryIt, View
-		var pres = document.getElementsByTagName('script');
-		for(var i=0;i<pres.length;i++){
+		pres = document.getElementsByTagName('script');
+		for(i=0;i<pres.length;i++){
 			(function(script){
 				var func = script.getAttribute('data-tryit');
 
@@ -88,7 +90,7 @@
 			})(pres[i]);
 		}
 
-		var pres = document.getElementsByTagName('link');
+		pres = document.getElementsByTagName('link');
 		for(var i=0;i<pres.length;i++){
 			(function(script){
 				if(script.getAttribute('href')){
@@ -123,7 +125,7 @@
 			// Create an 
 			var depth = parseInt(tag.tagName.match(/[0-9]/)[0], 10),
 				text = (tag.innerText||tag.innerHTML),
-				ref = text.replace(/\W/ig,'');
+				ref = text.toLowerCase().replace(/\s/g,'-').replace(/[^a-z0-9\_\-]/g, '');
 
 			var li = create('li', {html: create('a', {href:"#" +ref, text: text }), id : "toc_"+ref});
 
