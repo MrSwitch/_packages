@@ -91,7 +91,7 @@
 		}
 
 		pres = document.getElementsByTagName('link');
-		for(var i=0;i<pres.length;i++){
+		for(i=0;i<pres.length;i++){
 			(function(script){
 				if(script.getAttribute('href')){
 
@@ -116,39 +116,47 @@
 			toc = document.querySelector('nav.toc'),
 			_toc = toc;
 
-		if(!toc){
-			return;
-		}
 
-		for(var i=0;i<headings.length;i++){
+		for(i=0;i<headings.length;i++){
 			var tag = headings[i];
 			// Create an 
 			var depth = parseInt(tag.tagName.match(/[0-9]/)[0], 10),
 				text = (tag.innerText||tag.innerHTML),
 				ref = text.toLowerCase().replace(/\s/g,'-').replace(/[^a-z0-9\_\-]/g, '');
 
-			var li = create('li', {html: create('a', {href:"#" +ref, text: text }), id : "toc_"+ref});
-
-			if(last_depth < depth){
-				var ul = create('ul');
-				toc.appendChild(ul);
-				ul.appendChild(li);
-			}
-			else if (last_depth > depth){
-				insertAfter(li, toc.parentNode.parentNode);
-			}
-			else{
-				insertAfter(li,toc);
-			}
-			toc = li;
-
 			// Add anchor
-			tag.parentNode.insertBefore(create('a',{name:ref}),tag);
+			tag.insertBefore(create('a',{name:ref, href:"#" +ref, "class":"anchor"}),tag.firstChild);
 
-			last_depth = depth;
+			if(toc){
+
+				var li = create('li', {html: create('a', {href:"#" +ref, text: text }), id : "toc_"+ref});
+
+				if(last_depth < depth){
+					var ul = create('ul');
+					toc.appendChild(ul);
+					ul.appendChild(li);
+				}
+				else if (last_depth > depth){
+					insertAfter(li, toc.parentNode.parentNode);
+				}
+				else{
+					insertAfter(li,toc);
+				}
+
+				if(toc){
+					toc = li;
+				}
+
+				last_depth = depth;
+			}
 		}
+
 		// Go back
 		toc = _toc;
+
+		if(!toc){
+			return;
+		}
 
 		// Add scroll event listeners
 		addEvent(window, 'scroll', function(e){
@@ -160,7 +168,11 @@
 			for(var i=0;i<headings.length;i++){
 				var tag = headings[i],
 					text = (tag.innerText||tag.innerHTML),
-					ref = text.replace(/\W/ig,'');
+					ref = tag.getElementsByTagName('a')[0];
+
+				if(ref){
+					ref = ref.getAttribute('href').replace(/^#/,'');
+				}
 
 
 				var t = findPos(tag)[1] + 100,

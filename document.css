@@ -114,6 +114,21 @@ a[name]{
 a{
 	color:inherit;
 }
+a.anchor{
+	position: relative;
+	text-indent: 0;
+	text-decoration: none;
+}
+
+h1:hover a.anchor:before,
+h2:hover a.anchor:before,
+h3:hover a.anchor:before,
+h4:hover a.anchor:before{
+	content: "\0221E";
+	position: absolute;
+	left: -30px;
+	color: rgb(0, 0, 0);
+}
 
 h1,h2,h3,h4{
 	font-weight:300;
