@@ -10,7 +10,7 @@ blockquote:after,body>form:after{margin-top:1px;border-color:#aaa #aaa transpare
 blockquote:before,body>form:before{margin-top:1px;border-color:#aaa transparent transparent #aaa;right:-1px;}
 footer{margin-top:50px;margin-bottom:0;box-shadow:0 -8px 5px -5px #aaaaaa;}footer:after{border-color:transparent #aaa #aaa transparent;top:-11px;left:-1px;}
 footer:before{top:-11px;border-color:transparent transparent #aaa #aaa;right:-1px;}
-footer .twitter-share-button{float:right;}footer .twitter-share-button span{margin-left:5px;position:relative;width:20px;height:20px;line-height:20px;text-align:center;display:inline-block;background-color:white;border:1px solid #ddd;color:black;}footer .twitter-share-button span:before,footer .twitter-share-button span:after{position:absolute;left:-5px;bottom:5px;content:" ";width:0;height:0;padding:0;border:5px solid transparent;border-width:3.5px 5px;border-right-color:inherit;border-left-width:0;}
+footer .twitter-share-button{float:right;cursor:pointer;}footer .twitter-share-button span{margin-left:5px;position:relative;width:20px;height:20px;line-height:20px;text-align:center;display:inline-block;background-color:white;border:1px solid #ddd;color:black;}footer .twitter-share-button span:before,footer .twitter-share-button span:after{position:absolute;left:-5px;bottom:5px;content:" ";width:0;height:0;padding:0;border:5px solid transparent;border-width:3.5px 5px;border-right-color:inherit;border-left-width:0;}
 footer .twitter-share-button span:after{border-right-color:white;left:-3px;}
 footer .twitter-share-button span:empty{display:none;}
 a{color:inherit;}a[name]{}
