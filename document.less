@@ -1,3 +1,4 @@
+@import "lesshat.less";
 @import url(http://fonts.googleapis.com/css?family=Lato:300);
 
 * {
@@ -6,10 +7,10 @@
 }
 
 html{
-    background-color: rgb(218, 219, 228);
-    font-size:16px;
-    font-weight:300;
-    background-attachment: fixed;
+	background-color: rgb(218, 219, 228);
+	font-size:16px;
+	font-weight:300;
+	background-attachment: fixed;
 }
 
 
@@ -108,6 +109,46 @@ footer{
 		top:-11px;
 		border-color: transparent transparent #aaa #aaa;
 		right: -1px;
+	}
+
+	.twitter-share-button{
+		float:right;
+
+		span{
+			@offset:5px;
+			margin-left:@offset;
+			position: relative;
+			@size:20px;
+			width:@size;
+			height:@size;
+			line-height:@size;
+			text-align: center;
+			display: inline-block;
+			background-color:white;
+			border:1px solid #ddd;
+			color:black;
+
+			&:before,&:after{
+				position:absolute;
+				left:-@offset;
+				bottom:5px;
+				content:" ";
+				width:0;
+				height:0;
+				padding:0;
+				border:@offset solid transparent;
+				border-width:(@offset*0.7) @offset;
+				border-right-color:inherit;
+				border-left-width:0;
+			}
+			&:after{
+				border-right-color:white;
+				left:-(@offset - 2);
+			}
+		}
+		span:empty{
+			display: none;
+		}
 	}
 }
 
@@ -520,12 +561,11 @@ nav.toc{
 			color:rgba(255,255,255,0.9);
 		}
 	}
-}
 
-@media all and (max-width: 1400px) {
-	nav.toc{
+	@media all and (max-width: 1400px) {
+
 		position: fixed;
-		left:50%;
+		right:0;
 		margin-left: 0;
 		color:inherit;
 		text-align:left;
@@ -560,7 +600,9 @@ nav.toc{
 			}
 		} 
 	}
+
 }
+
 
 /**
  * Really small screens
@@ -570,3 +612,20 @@ nav.toc{
 		padding-left: 20px;
 	}
 }
+
+
+
+
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */

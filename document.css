@@ -10,6 +10,9 @@ blockquote:after,body>form:after{margin-top:1px;border-color:#aaa #aaa transpare
 blockquote:before,body>form:before{margin-top:1px;border-color:#aaa transparent transparent #aaa;right:-1px;}
 footer{margin-top:50px;margin-bottom:0;box-shadow:0 -8px 5px -5px #aaaaaa;}footer:after{border-color:transparent #aaa #aaa transparent;top:-11px;left:-1px;}
 footer:before{top:-11px;border-color:transparent transparent #aaa #aaa;right:-1px;}
+footer .twitter-share-button{float:right;}footer .twitter-share-button span{margin-left:5px;position:relative;width:20px;height:20px;line-height:20px;text-align:center;display:inline-block;background-color:white;border:1px solid #ddd;color:black;}footer .twitter-share-button span:before,footer .twitter-share-button span:after{position:absolute;left:-5px;bottom:5px;content:" ";width:0;height:0;padding:0;border:5px solid transparent;border-width:3.5px 5px;border-right-color:inherit;border-left-width:0;}
+footer .twitter-share-button span:after{border-right-color:white;left:-3px;}
+footer .twitter-share-button span:empty{display:none;}
 a{color:inherit;}a[name]{}
 a.anchor{position:relative;text-indent:0;text-decoration:none;}
 h1,h2,h3,h4{font-weight:300;text-indent:40px;}h1:hover a.anchor:before,h2:hover a.anchor:before,h3:hover a.anchor:before,h4:hover a.anchor:before{content:"\0221E";position:absolute;left:-30px;color:#000000;}
@@ -69,4 +72,8 @@ nav.toc{position:fixed;top:0;margin-left:-260px;max-width:200px;width:auto;text-
 nav.toc ul li li a{font-size:90%;}
 nav.toc ul li li li a{font-size:80%;font-weight:normal;}
 nav.toc a{color:inherit;text-decoration:none;display:block;overflow:hidden;text-overflow:ellipsis;}nav.toc a:hover{color:white;color:rgba(255, 255, 255, 0.9);}
-@media all and (max-width:1400px){nav.toc{position:fixed;left:50%;margin-left:0;color:inherit;text-align:left;top:0;z-index:1;background-color:white;padding:10px;border:1px solid #ccc;box-shadow:-1px 1px 5px #cccccc;max-height:100%;overflow:auto;}nav.toc:before{content:"[TOC]";} nav.toc ul{display:none;} nav.toc:hover{overflow:auto;}nav.toc:hover ul{display:block;} nav.toc li a:hover,nav.toc li li a:hover,nav.toc li li li a:hover{color:inherit;}}@media all and (max-width:400px){ul{padding-left:20px;}}
+@media all and (max-width:1400px){nav.toc{position:fixed;right:0;margin-left:0;color:inherit;text-align:left;top:0;z-index:1;background-color:white;padding:10px;border:1px solid #ccc;box-shadow:-1px 1px 5px #cccccc;max-height:100%;overflow:auto;}nav.toc:before{content:"[TOC]";} nav.toc ul{display:none;} nav.toc:hover{overflow:auto;}nav.toc:hover ul{display:block;} nav.toc li a:hover,nav.toc li li a:hover,nav.toc li li li a:hover{color:inherit;}}
+@media all and (max-width:400px){ul{padding-left:20px;}}.clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
+.clearfix{display:inline-block;}
+* html .clearfix{height:1%;}
+.clearfix{display:block;}

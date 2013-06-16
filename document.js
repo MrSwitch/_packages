@@ -20,9 +20,10 @@
 		content:'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
 	}), s);
 
+	var loaded = document.readyState === 'complete';
 
 	// Insert on Document Load
-	addEvent(document, "DOMContentLoaded", function(){
+	addEvent(document, loaded || "DOMContentLoaded", function(){
 
 		var pres, i;
 
@@ -32,13 +33,37 @@
 		}
 
 
+		var url = window.location.href;
+
 		// Add Footer link to repo
 		document.body.appendChild(create('footer',{
-				html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a> (@setData) '+ (repo?'[<a href="'+repo+'">Source and Comments on GitHub</a>]':'')
+				html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a> '+ (repo?'[<a href="'+repo+'">Source and Comments on GitHub</a>] <a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-via="@setData">Tweet<span></span></a><div class="clearfix"></div>':'')
 			}
 		));
 
+		// Install the twitter widget
+		// Probably could make this a little more ajaxy
+		jsonp('http://urls.api.twitter.com/1/urls/count.json?url='+encodeURIComponent(url)+'&noncache='+Math.random(),function(r){
+			// Add value to twitter icon
+			document.querySelector('.twitter-share-button span').innerHTML = r.count;
+		});
 
+		//
+		// Add event to twitter button
+		addEvent(document.querySelector('.twitter-share-button'),'click',function(e){
+			
+			e.preventDefault();
+
+			var w = 550,
+				h = 250,
+				l = (screen.width/2)-(w/2),
+				t = (screen.height/2)-(h/2);
+
+			window.open("http://twitter.com/share?text="+encodeURIComponent(document.title + " by " + this.getAttribute('data-via')), 'twitter', 'width='+w+',height='+h+',left='+l+'px,top='+t+'px');
+		});
+
+
+		//
 		function tryitButton(pre,func){
 			var btn = create('button',{html:'tryit','class':'tryit'});
 			insertAfter(btn, pre);
@@ -119,7 +144,7 @@
 
 		for(i=0;i<headings.length;i++){
 			var tag = headings[i];
-			// Create an 
+			// Create
 			var depth = parseInt(tag.tagName.match(/[0-9]/)[0], 10),
 				text = (tag.innerText||tag.innerHTML),
 				ref = text.toLowerCase().replace(/\s/g,'-').replace(/[^a-z0-9\_\-]/g, '');
@@ -214,7 +239,7 @@
 	// Create and Append new Dom elements
 	// @param node string
 	// @param attr object literal
-	// @param dom/string 
+	// @param dom/stringx
 	//
 	function create(node,attr){
 
@@ -253,11 +278,35 @@
 	}
 
 	function addEvent(obj, eventName, listener) { //function to add event
+		if(eventName===true){
+			// execue immediatley
+			listener();
+			return;
+		}
 		if (obj.addEventListener) {
 			obj.addEventListener(eventName, listener, false);
 		} else {
 			obj.attachEvent("on" + eventName, listener);
 		}
+	}
+
+
+	//
+	// JSONP
+	function jsonp(url, callback){
+		// JSONP
+		// Make the anonymous function. not anonymous
+		var callback_name = 'jsonp_' + parseInt(Math.random()*1e10,10);
+
+		window[callback_name] = callback;
+		// find a place to insert the script tag
+		var sibling = document.getElementsByTagName('script')[0];
+		// Create the script tag
+		var script = document.createElement('script');
+		// Update the path with the callback name
+		script.src = (url+"&callback="+callback_name);
+		// Append
+		sibling.parentNode.insertBefore(script,sibling);
 	}
 
 })();
