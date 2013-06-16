@@ -37,7 +37,7 @@
 
 		// Add Footer link to repo
 		document.body.appendChild(create('footer',{
-				html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a> '+ (repo?'[<a href="'+repo+'">Source and Comments on GitHub</a>] <a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-via="@setData">Tweet<span></span></a><div class="clearfix"></div>':'')
+				html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a> '+ (repo?'[<a href="'+repo+'">Source and Comments on GitHub</a>] <a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-via="@setData"><i id="icon-twitter"></i><span></span></a><div class="clearfix"></div>':'')
 			}
 		));
 
