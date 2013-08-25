@@ -283,9 +283,12 @@
 			listener();
 			return;
 		}
+		if(!obj){
+			return;
+		}
 		if (obj.addEventListener) {
 			obj.addEventListener(eventName, listener, false);
-		} else {
+		} else if(obj.attachEvent){
 			obj.attachEvent("on" + eventName, listener);
 		}
 	}
