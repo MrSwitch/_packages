@@ -1,8 +1,8 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:300);
+@import url(//fonts.googleapis.com/css?family=Lato:300);
 *{box-sizing:border-box;-moz-box-sizing:border-box;}
 html{background-color:#dadbe4;font-size:16px;font-weight:300;background-attachment:fixed;}
 body{border:1px solid #c9caca;font-family:'Lato',sans-serif;margin:0 auto;margin-bottom:10px;padding:35px 60px 15px 60px;max-width:1024px;background-color:#FFFFFF;color:#4E5260;position:relative;line-height:2;}body.fullscreen{max-width:none;}
-button{padding:10px;}
+button{padding:10px;border-radius:5px;border-width:1px;}button:hover{opacity:0.8;}
 blockquote,footer{background-color:#f74949;color:white;border:1px solid #CCC;padding:15px 70px;margin:0 -70px 35px -70px;text-align:justify;position:relative;}body.fullscreen blockquote,body.fullscreen footer{padding:15px 60px;margin:0 -60px 35px -60px;}
 blockquote{box-shadow:0 8px 5px -5px #aaaaaa;}blockquote p{line-height:inherit;}
 blockquote:after,footer:after,body>form:after,blockquote:before,footer:before,body>form:before{content:' ';position:absolute;width:0;height:0;top:100%;border-width:5px;border-style:solid;border-color:transparent;}body.fullscreen blockquote:after,body.fullscreen footer:after,body.fullscreen body>form:after,body.fullscreen blockquote:before,body.fullscreen footer:before,body.fullscreen body>form:before{content:none;}
@@ -10,9 +10,10 @@ blockquote:after,body>form:after{margin-top:1px;border-color:#aaa #aaa transpare
 blockquote:before,body>form:before{margin-top:1px;border-color:#aaa transparent transparent #aaa;right:-1px;}
 footer{margin-top:60px;margin-bottom:0;box-shadow:0 -8px 5px -5px #aaaaaa;}footer:after{border-color:transparent #aaa #aaa transparent;top:-11px;left:-1px;}
 footer:before{top:-11px;border-color:transparent transparent #aaa #aaa;right:-1px;}
-footer .twitter-share-button{color:#444;float:right;cursor:pointer;}footer .twitter-share-button span{margin-left:5px;position:relative;line-height:1;text-align:center;display:inline-block;background-color:white;border:1px solid #ddd;color:black;border-radius:15%;}footer .twitter-share-button span:before,footer .twitter-share-button span:after{position:absolute;left:-6px;bottom:5px;content:" ";width:0;height:0;padding:0;border:5px solid transparent;border-width:3.5px 5px;border-right-color:inherit;border-left-width:0;}
-footer .twitter-share-button span:after{border-right-color:white;left:-4px;border-width:2.975px 4.25px;border-left-width:0;bottom:5.5px;}
-footer .twitter-share-button span:empty{display:none;}
+footer .twitter-share-button,footer .github-star-button{float:right;cursor:pointer;}
+footer span.comment{color:#444;margin-left:5px;position:relative;line-height:1;text-align:center;display:inline-block;background-color:white;border:1px solid #ddd;color:black;border-radius:15%;}footer span.comment:before,footer span.comment:after{position:absolute;left:-6px;bottom:5px;content:" ";width:0;height:0;padding:0;border:5px solid transparent;border-width:3.5px 5px;border-right-color:inherit;border-left-width:0;}
+footer span.comment:after{border-right-color:white;left:-4px;border-width:2.975px 4.25px;border-left-width:0;bottom:5.5px;}
+footer span.comment:empty{display:none;}
 a{color:inherit;}a[name]{}
 a.anchor{position:relative;text-indent:0;text-decoration:none;}
 h1,h2,h3,h4{font-weight:300;text-indent:40px;}h1:hover a.anchor:before,h2:hover a.anchor:before,h3:hover a.anchor:before,h4:hover a.anchor:before{content:"\0221E";position:absolute;left:-30px;color:#000000;}
@@ -76,5 +77,6 @@ nav.toc a{color:inherit;text-decoration:none;display:block;overflow:hidden;text-
 @media all and (max-width:400px){ul{padding-left:20px;}}.clearfix{display:inline-block;}.clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
 * html .clearfix{height:1%;}
 .clearfix{display:block;}
+#icon-github{color:white;font-style:normal;margin-left:15px;display:inline-block;font-weight:bold;}#icon-github:after{content:"GitHub";}
 #icon-twitter{position:relative;display:inline-block;border-bottom-left-radius:50% 100%;border-bottom-right-radius:50% 100%;background-color:#ffffff;width:1.6em;height:0.4em;-webkit-transform:rotate(-25deg) translate(-0.15em,0);-webkit-transform-origin:100% 0;-moz-transform:rotate(-25deg) translate(-0.15em,0);-moz-transform-origin:100% 0;-ms-transform:rotate(-25deg) translate(-0.15em,0);-ms-transform-origin:100% 0;-o-transform:rotate(-25deg) translate(-0.15em,0);-o-transform-origin:100% 0;transform:rotate(-25deg) translate(-0.15em,0);transform-origin:100% 0;box-shadow:0.4em -0.35em 0 -0.17em #ffffff,0.35em -0.45em 0 -0.12em #ffffff;}#icon-twitter:before{position:absolute;content:"";top:-0.9em;left:0.5em;width:0.8em;height:0.26666666666666666em;border-bottom-left-radius:50% 100%;border-bottom-right-radius:50% 100%;background-color:#ffffff;-webkit-transform:rotate(55deg);-webkit-transform-origin:0 0;-moz-transform:rotate(55deg);-moz-transform-origin:0 0;-ms-transform:rotate(55deg);-ms-transform-origin:0 0;-o-transform:rotate(55deg);-o-transform-origin:0 0;transform:rotate(55deg);transform-origin:0 0;box-shadow:0.13em 0.3em 0 -0.05em #ffffff, 0.4em 0.52em 0 -0.05em #ffffff, 0.25em 0.34em 0 -0.05em #ffffff, 0.5em 0.4em 0 -0.05em #ffffff, 0.1em 0.1em 0 #ffffff, 0.05em 0.08em 0 #ffffff;}
 #icon-twitter:after{position:absolute;content:"";top:-0.55em;left:1em;width:0.69em;height:0.69em;border-radius:50%;background-color:#ffffff;box-shadow:-0.5em 0.2em 0 #ffffff;}

@@ -27,9 +27,10 @@
 
 		var pres, i;
 
-		var repo = (window.location.pathname||'').match(/[^\/]+/);
+		var repo_path, repo = (window.location.pathname||'').match(/[^\/]+/);
 		if(repo){
-			repo = "https://github.com/MrSwitch/"+repo[0]+"";
+			repo = repo[0];
+			repo_path = "https://github.com/MrSwitch/"+repo;
 		}
 
 
@@ -37,16 +38,27 @@
 
 		// Add Footer link to repo
 		document.body.appendChild(create('footer',{
-				html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a> '+ (repo?'[<a href="'+repo+'">Source and Comments on GitHub</a>] <a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-via="@setData" title="Tweet"><i id="icon-twitter"></i><span></span></a><div class="clearfix"></div>':'')
+				html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a> '+ (repo?'[<a href="'+repo_path+'">Source and Comments on GitHub</a>] <a href="'+repo_path+'" class="github-star-button" target="_blank" title="Stars"><i id="icon-github"></i><span class="comment"></span></a> <a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-via="@setData" title="Tweet"><i id="icon-twitter"></i><span class="comment"></span></a> <div class="clearfix"></div>':'')
 			}
 		));
 
-		// Install the twitter widget
-		// Probably could make this a little more ajaxy
-		jsonp('http://urls.api.twitter.com/1/urls/count.json?url='+encodeURIComponent(url)+'&noncache='+Math.random(),function(r){
-			// Add value to twitter icon
-			document.querySelector('.twitter-share-button span').innerHTML = r.count;
-		});
+		// Repo
+		if(repo){
+
+			// Install the twitter widget
+			// Probably could make this a little more ajaxy
+			jsonp('http://urls.api.twitter.com/1/urls/count.json?url='+encodeURIComponent(url)+'&noncache='+Math.random(),function(r){
+				// Add value to twitter icon
+				document.querySelector('.twitter-share-button span').innerHTML = r.count;
+			});
+
+			// Install the GitHub widget
+			// Probably could make this a little more ajaxy
+			jsonp('https://api.github.com/repos/MrSwitch/'+repo+'?',function(r){
+				// Add value to twitter icon
+				document.querySelector('.github-star-button span').innerHTML = r.data.watchers;
+			});
+		}
 
 		//
 		// Add event to twitter button
