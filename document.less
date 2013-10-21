@@ -43,14 +43,31 @@ body{
 		max-width:none;
 	}
 }
-button{
+.button, button{
 	padding:10px;
 	border-radius: 5px;
-	border-width: 1px;
+	background-color: buttonface;
+	display: inline-block;
+	border: 1px outset;
+	text-decoration: none;
 
 	&:hover{
 		opacity:0.8;
 	}
+
+	&.green{
+		color:white;
+		background-color: #10A54A;	
+	}
+	&.blue{
+		color:white;
+		background-color: #0F6AB4;		
+	}
+	&.red{
+		color:white;
+		background-color: #F00;		
+	}
+
 	/*
 	display: inline-block;
 	border:0;

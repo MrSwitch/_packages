@@ -2,7 +2,10 @@
 *{box-sizing:border-box;-moz-box-sizing:border-box;}
 html{background-color:#dadbe4;font-size:16px;font-weight:300;background-attachment:fixed;}
 body{border:1px solid #c9caca;font-family:'Lato',sans-serif;margin:0 auto;margin-bottom:10px;padding:35px 60px 15px 60px;max-width:1024px;background-color:#FFFFFF;color:#4E5260;position:relative;line-height:2;}body.fullscreen{max-width:none;}
-button{padding:10px;border-radius:5px;border-width:1px;}button:hover{opacity:0.8;}
+.button,button{padding:10px;border-radius:5px;background-color:buttonface;display:inline-block;border:1px outset;text-decoration:none;}.button:hover,button:hover{opacity:0.8;}
+.button.green,button.green{color:white;background-color:#10A54A;}
+.button.blue,button.blue{color:white;background-color:#0F6AB4;}
+.button.red,button.red{color:white;background-color:#F00;}
 blockquote,footer{background-color:#f74949;color:white;border:1px solid #CCC;padding:15px 70px;margin:0 -70px 35px -70px;text-align:justify;position:relative;}body.fullscreen blockquote,body.fullscreen footer{padding:15px 60px;margin:0 -60px 35px -60px;}
 blockquote{box-shadow:0 8px 5px -5px #aaaaaa;}blockquote p{line-height:inherit;}
 blockquote:after,footer:after,body>form:after,blockquote:before,footer:before,body>form:before{content:' ';position:absolute;width:0;height:0;top:100%;border-width:5px;border-style:solid;border-color:transparent;}body.fullscreen blockquote:after,body.fullscreen footer:after,body.fullscreen body>form:after,body.fullscreen blockquote:before,body.fullscreen footer:before,body.fullscreen body>form:before{content:none;}
