@@ -149,7 +149,7 @@
 
 		// TOC
 		var last_depth = 0,
-			headings = document.querySelectorAll('h1,h2,h3');
+			headings = document.querySelectorAll('h1,h2');
 			toc = document.querySelector('nav.toc'),
 			_toc = toc;
 
@@ -191,9 +191,6 @@
 		// Go back
 		toc = _toc;
 
-		if(!toc){
-			return;
-		}
 
 		// Add scroll event listeners
 		addEvent(window, 'scroll', function(e){
@@ -216,13 +213,22 @@
 					h = (tag.outerHeight||tag.innerHeight) + 50;
 
 				if( T < t && T+H > t ){
+	
+					if(toc){
+						var a = toc.getElementsByClassName('active');
+						for(var j=0;j<a.length;j++){
+							a[j].className = '';
+						}
 
-					var a = toc.getElementsByClassName('active');
-					for(var j=0;j<a.length;j++){
-						a[j].className = '';
+						// Activate this one
+						document.getElementById('toc_'+ref).className='active';
 					}
 
-					document.getElementById('toc_'+ref).className='active';
+					// Change the current window hash
+					if("history" in window && "replaceState" in window.history){
+						history.replaceState({}, document.title, "#"+ref);
+					}
+
 					// Stop looping
 					return;
 				}
