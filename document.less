@@ -407,15 +407,17 @@ pre,.pre{
 }
 
 script.pre{
-	&:not(:empty):after{
-		display: block;
-		content:"</script>";
-		color:#a4a4a5;
-	}
+	&:not([type="text/html"]):not(:empty){
+		&:after{
+			display: block;
+			content:"</script>";
+			color:#a4a4a5;
+		}
 
-	&:not(:empty):before{
-		content:"<script>";
-		color:#a4a4a5;
+		&:before{
+			content:"<script>";
+			color:#a4a4a5;
+		}
 	}
 
 	&[src]:after{
