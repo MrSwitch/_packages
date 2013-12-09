@@ -1,7 +1,12 @@
 @import "mixins";
+@import "mixins-logos";
 @import url(//fonts.googleapis.com/css?family=Lato:300);
 
+
 @body-padding:60px;
+@tablet: ~"all and (max-width: 1048px)";
+@mobile: ~"all and (max-width: 650px), screen and (max-device-width: 480px)";
+
 
 * {
 	box-sizing:border-box;
@@ -30,8 +35,7 @@ body > form{
 body{
 	border: 1px solid rgb(201, 202, 202);
 	font-family: 'Lato', sans-serif;
-	margin: 0 auto;
-	margin-bottom:10px;
+	margin: 0 auto 75px auto;
 	padding: 35px @body-padding 15px @body-padding;
 	max-width: 1024px;
 	background-color: #FFFFFF;
@@ -42,7 +46,28 @@ body{
 	&.fullscreen{
 		max-width:none;
 	}
+	@media @tablet {
+		padding:10px;
+	}
+	@media @mobile {
+		margin:0;
+		padding:4px;
+	}
 }
+
+// Body offset
+// Apply this mixin to other elements to ignore the containers left right padding offset
+.body-offset(){
+	margin-left:-@body-padding;
+	@media @tablet{
+		margin-left:-10px;
+	}
+	@media @mobile{
+		margin-left:-4px;
+	}
+}
+
+
 .button, button{
 	padding:10px;
 	border-radius: 5px;
@@ -78,7 +103,7 @@ body{
 	color:white;*/
 }
 
-blockquote, footer{
+blockquote{
 	@padding:@body-padding + 10px;
 	background-color: rgb(247, 73, 73);
 	color:white;
@@ -105,7 +130,7 @@ blockquote {
 }
 
 
-blockquote,footer,body > form{
+blockquote,body > form{
 	&:after,&:before{
 		content: ' ';
 		position: absolute;
@@ -137,69 +162,27 @@ blockquote, body > form{
 
 
 footer{
-	margin-top:@body-padding;
-	margin-bottom:0;
-	box-shadow: 0 -8px 5px -5px #aaa;
-	&:after{
-		border-color: transparent #aaa #aaa transparent;
-		top:-11px;
-		left: -1px;
-	}
-	&:before{
-		top:-11px;
-		border-color: transparent transparent #aaa #aaa;
-		right: -1px;
-	}
+	position: absolute;
+	width:100%;
+	bottom: -3em;
+	color:black;
 
-	.twitter-share-button,
-	.github-star-button{
-		float:right;
-		cursor:pointer;
-	}
+	// Fix the body padding offset
+	.body-offset();
 
-	span.comment{
-		color:#444;
-		@offset:5px;
-		margin-left:@offset;
+	@media @mobile{
 		position: relative;
-		@size:20px;
-		line-height:1;
-		text-align: center;
-		display: inline-block;
-		background-color:white;
-		border:1px solid #ddd;
-		color:black;
-		border-radius:15%;
-
-		&:before,&:after{
-			position:absolute;
-			left:-(@offset + 1);
-			bottom:5px;
-			content:" ";
-			width:0;
-			height:0;
-			padding:0;
-			border:@offset solid transparent;
-			border-width:(@offset*0.7) @offset;
-			border-right-color:inherit;
-			border-left-width:0;
-		}
-		&:after{
-			border-right-color:white;
-			left:-(@offset - 1);
-			border-width:(@offset*0.7)*0.85 (@offset*0.85);
-			border-left-width:0;
-			bottom: 5.5px;
-		}
-		&:empty{
-			display: none;
+		bottom:0;
+		.pull-right{
+			float: none;
 		}
 	}
 }
 
 
-
 a{
+	cursor:pointer;
+
 	&[name]{
 		/*	display: inline-block; */
 	}
@@ -264,11 +247,8 @@ i{
 
 
 
-@media all and (max-width: 1000px) {
-	body{
-		padding:10px;
-	}
-	blockquote,footer,body>form{
+@media @tablet{
+	blockquote,body>form{
 		padding:10px;
 		margin:0;
 	}
@@ -279,12 +259,9 @@ i{
 	blockquote{
 		box-shadow: 0 20px 0 -10px #aaa;
 	}	
-	footer{
-		box-shadow: 0 -20px 0 -10px #aaa;
-	}	
 }
 
-@media all and (max-width: 650px), screen and (max-device-width: 480px) {
+@media @mobile{
 	*{
 		max-width:100%;
 	}
@@ -294,10 +271,6 @@ i{
 	}
 	h2{
 		text-indent: 10px;
-	}
-	body {
-		margin:0;
-		padding:4px;
 	}
 	pre,.pre{
 		overflow-x:auto;
@@ -552,12 +525,43 @@ table{
 	}
 
 
+/* TOC */
+.toolbar{
+	position: absolute;
+	top: 0;
+	width: 100%;
+	text-align: right;
+	margin: 0;
+
+	.pull-right{
+		padding: 10px;
+	}
+
+	// Fix the body padding offset
+	.body-offset();
+
+	@media @tablet{
+		.pull-right{
+			padding-right:75px;
+		}
+	}
+
+	@media @mobile{
+		position: relative;
+		top:0;
+		.pull-right{
+			float: none;
+			padding-right:10px;
+		}
+	}
+}
+
 
 /* TOC */
 nav.toc{
 	position:fixed;
 	top:0;
-	margin-left:-260px;
+	margin-left:-300px;
 	max-width:200px;
 	width:auto;
 	text-align:right;
@@ -567,48 +571,52 @@ nav.toc{
 	ul{
 		margin:0;
 		padding:0;
+	}
 
-		li{
-			font-size:100%;
-			list-style:none;
-			padding:4px 0;
-			position:relative;
+	li{
+		font-size:100%;
+		list-style:none;
+		padding:4px 0;
+		position:relative;
 
-			&.active:after{
-				content:" ";
-				position:absolute;
-				display:inline-block;
-				right:-10px;
-				top:0;
-				border:10px solid transparent;
-				border-left-width:0;
-				border-right-color:inherit;
-				border-right-width:5px;
-			}
-
-			li{
-				a{
-					font-size:90%;
-				}
-				li a{
-					font-size:80%;
-					font-weight:normal;
-				}
-			}
+		&.active:after{
+			content:" ";
+			position:absolute;
+			display:inline-block;
+			right:-10px;
+			top:0.5em;
+			border:10px solid transparent;
+			border-left-width:0;
+			border-right-color:inherit;
+			border-right-width:5px;
 		}
 
+		li{
+			a{
+				font-size:90%;
+			}
+			li a{
+				font-size:80%;
+				font-weight:normal;
+			}
+		}
 	}
+
 	a{
 		color:inherit;
 		text-decoration: none;
 		display: block;
 		overflow: hidden;
 		text-overflow:ellipsis;
+		.transition( all 0.3s );
 		
 		&:hover{
 			color:white;
 			color:rgba(255,255,255,0.9);
 		}
+	}
+	li.active > a{
+		.transform( translateX(-10px) );
 	}
 
 	@media all and (max-width: 1400px) {
@@ -683,10 +691,9 @@ nav.toc{
 /* close commented backslash hack */
 
 
-#icon-github{
-	color:white;
+.icon-github{
+	color:#444;
 	font-style: normal;
-	margin-left:15px;
 	display: inline-block;
 	font-weight:bold;
 
@@ -695,66 +702,62 @@ nav.toc{
 	}
 }
 
-#icon-twitter{
+.icon-twitter{
+	.twitter-logo(#444);
+}
 
-	@color:white;
 
+.speeach-bubble{
+	@border-color:#444;
+	@background-color:white;
+	@color:#444;
+	color:@color;
+	@offset:5px;
+	margin-left:@offset;
 	position: relative;
+	@size:20px;
+	line-height:1;
+	text-align: center;
 	display: inline-block;
-	border-bottom-left-radius: 50% 100%;
-	border-bottom-right-radius: 50% 100%;
-	background-color: @color;
-	@width: 1.6em;
-	@height: 0.4em;
+	background-color:@background-color;
+	border:1px solid @border-color;
+	color:black;
+	border-radius:15%;
+	padding:5px;
 
-	width: @width;
-	height: @height;
-
-	.transform(~'rotate(-25deg) translate(-0.15em,0)', 100% 0);
-
-	// BEAK
-	box-shadow: 0.4em -0.35em 0 -0.17em @color,
-				0.35em -0.45em 0 -0.12em @color;
-
-
-	&:before {
-		position: absolute;
-		content: "";
-		top: -0.9em;
-		left: 0.5em;
-		width: @width / 2;
-		height: @height /1.5;
-
-		border-bottom-left-radius: 50% 100%;
-		border-bottom-right-radius: 50% 100%;
-		background-color: @color;
-
-		.transform(~'rotate(55deg)');
-
-		// TAIL
-		box-shadow: 0.13em 0.3em 0 -0.05em @color, // tail
-					0.4em 0.52em 0 -0.05em @color, // tail
-					0.25em 0.34em 0 -0.05em @color, // tail
-					0.5em 0.4em 0 -0.05em @color, // filler
-					0.1em 0.1em 0 @color, // filler
-					0.05em 0.08em 0 @color; // filler
+	&:before,&:after{
+		position:absolute;
+		left:-(@offset + 1);
+		bottom:5px;
+		content:" ";
+		width:0;
+		height:0;
+		padding:0;
+		border:@offset solid transparent;
+		border-width:(@offset*0.7) @offset;
+		border-right-color:inherit;
+		border-left-width:0;
 	}
+	&:after{
+		border-right-color:@background-color;
+		left:-(@offset - 1);
+		border-width:(@offset*0.7)*0.85 (@offset*0.85);
+		border-left-width:0;
+		bottom: 5.5px;
+	}
+	&:empty{
+		display: none;
+	}
+}
 
-	&:after {
 
-		// HEAD
-		position: absolute;
-		content: "";
-		top: -0.55em;
-		left: 1em;
-		@size:0.69em;
-		width: @size;
-		height: @size;
+.pull-right{
+	float:right;
+}
 
-		border-radius: 50%;
-		background-color: @color;
-
-		// BODY FILLER
-		box-shadow: -0.5em 0.2em 0 @color;
+.period{
+	margin:0 20px;
+	&:after{
+		content: "\022C5";
 	}
 }

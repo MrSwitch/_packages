@@ -3,10 +3,10 @@
  * Adds document navigation to a page.
  */
 
-(function(){
+(function(window, document){
 
 	// fix HTML5 in IE
-	var a = "header,section,datalist,option,footer,article,style,script".split(",");
+	var a = "header,section,datalist,option,footer,nav,menu,aside,article,style,script".split(",");
 	for( var i=0;i<a.length;i++){
 		document.createElement(a[i]);
 	}
@@ -38,25 +38,39 @@
 
 		// Add Footer link to repo
 		document.body.appendChild(create('footer',{
-				html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a> '+ (repo?'[<a href="'+repo_path+'">Source and Comments on GitHub</a>] <a href="'+repo_path+'" class="github-star-button" target="_blank" title="Stars"><i id="icon-github"></i><span class="comment"></span></a> <a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-via="@setData" title="Tweet"><i id="icon-twitter"></i><span class="comment"></span></a> <div class="clearfix"></div>':'')
+				html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a> '+ (repo?'<span class="period"></span><a href="'+repo_path+'">Source and Comments on GitHub</a> <div class="pull-right"><a href="'+repo_path+'" class="github-star-button" target="_blank" title="Stars"><i class="icon-github"></i><span class="speeach-bubble"></span></a><span class="period"></span><a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-via="@setData" title="Tweet"><i class="icon-twitter"></i><span class="speeach-bubble"></span></a><div class="clearfix"></div></div>':'')
 			}
 		));
+
+		// Add Social buttons to the top
+		if(repo){
+			document.body.insertBefore(create('aside',{
+					'class' : 'toolbar',
+					'html' : '<div class="pull-right"><a href="'+repo_path+'" target="_blank">Open Source</a><span class="period"></span><a href="'+repo_path+'" class="github-star-button" target="_blank" title="Stars"><i class="icon-github"></i><span class="speeach-bubble"></span></a><span class="period"></span><a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-via="@setData" title="Tweet"><i class="icon-twitter"></i><span class="speeach-bubble"></span></a> <div class="clearfix"></div></div>'
+				}
+			),document.body.firstElementChild);
+		}
 
 		// Repo
 		if(repo){
 
 			// Install the twitter widget
 			// Probably could make this a little more ajaxy
-			jsonp('http://urls.api.twitter.com/1/urls/count.json?url='+encodeURIComponent(url)+'&noncache='+Math.random(),function(r){
+			jsonp('http://urls.api.twitter.com/1/urls/count.json?url='+encodeURIComponent(url),function(r){
 				// Add value to twitter icon
-				document.querySelector('.twitter-share-button span').innerHTML = r.count;
+				each('.twitter-share-button span.speeach-bubble', function(){
+					this.innerHTML = r.count;
+				});
 			});
 
 			// Install the GitHub widget
 			// Probably could make this a little more ajaxy
 			jsonp('https://api.github.com/repos/MrSwitch/'+repo+'?',function(r){
 				// Add value to twitter icon
-				document.querySelector('.github-star-button span').innerHTML = r.data.watchers;
+				// Add value to twitter icon
+				each('.github-star-button span.speeach-bubble', function(){
+					this.innerHTML = r.data.watchers;
+				});
 			});
 		}
 
@@ -314,10 +328,11 @@
 
 	//
 	// JSONP
+	var jsonp_counter = 0;
 	function jsonp(url, callback){
 		// JSONP
 		// Make the anonymous function. not anonymous
-		var callback_name = 'jsonp_' + parseInt(Math.random()*1e10,10);
+		var callback_name = 'jsonp_document_' + jsonp_counter++;
 
 		window[callback_name] = callback;
 		// find a place to insert the script tag
@@ -330,7 +345,18 @@
 		sibling.parentNode.insertBefore(script,sibling);
 	}
 
-})();
+
+
+	function each(matches, callback){
+		matches = document.querySelectorAll(matches);
+
+		for(var i=0;i<matches.length;i++){
+			callback.call(matches[i]);
+		}
+	}
+
+
+})(window, document);
 
 
 // Google Analytics
