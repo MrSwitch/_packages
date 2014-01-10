@@ -34,11 +34,13 @@
 		}
 
 
-		var url = window.location.href;
+		var url = window.location.href, 
+			social_btns = '<a href="'+repo_path+'" class="github-star-button" target="_blank" title="Stars"><i class="icon-github"></i><span class="speeach-bubble"></span></a><span class="period"></span><a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-via="@setData" title="Tweet"><i class="icon-twitter"></i><span class="speeach-bubble"></span></a>';
+
 
 		// Add Footer link to repo
 		document.body.appendChild(create('footer',{
-				html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a> '+ (repo?'<span class="period"></span><a href="'+repo_path+'">Source and Comments on GitHub</a> <div class="pull-right"><a href="'+repo_path+'" class="github-star-button" target="_blank" title="Stars"><i class="icon-github"></i><span class="speeach-bubble"></span></a><span class="period"></span><a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-via="@setData" title="Tweet"><i class="icon-twitter"></i><span class="speeach-bubble"></span></a><div class="clearfix"></div></div>':'')
+				html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a> '+ (repo?'<span class="period"></span><a href="'+repo_path+'">Source and Comments on GitHub</a> <div class="pull-right">'+ social_btns +'<div class="clearfix"></div></div>':'')
 			}
 		));
 
@@ -46,7 +48,7 @@
 		if(repo){
 			document.body.insertBefore(create('aside',{
 					'class' : 'toolbar',
-					'html' : '<div class="pull-right"><a href="'+repo_path+'" target="_blank">Open Source</a><span class="period"></span><a href="'+repo_path+'" class="github-star-button" target="_blank" title="Stars"><i class="icon-github"></i><span class="speeach-bubble"></span></a><span class="period"></span><a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-via="@setData" title="Tweet"><i class="icon-twitter"></i><span class="speeach-bubble"></span></a> <div class="clearfix"></div></div>'
+					'html' : '<div class="pull-right"><a href="'+repo_path+'" target="_blank">Open Source</a><span class="period"></span>'+ social_btns +' <div class="clearfix"></div></div>'
 				}
 			),document.body.firstElementChild);
 		}
@@ -76,7 +78,7 @@
 
 		//
 		// Add event to twitter button
-		addEvent(document.querySelector('.twitter-share-button'),'click',function(e){
+		addEvent(document.querySelectorAll('.twitter-share-button'),'click',function(e){
 			
 			e.preventDefault();
 
@@ -310,6 +312,12 @@
 	}
 
 	function addEvent(obj, eventName, listener) { //function to add event
+		if(obj instanceof NodeList ){
+			for(var i=0;i<obj.length;i++){
+				addEvent( obj[i], eventName, listener );
+			}
+			return;
+		}
 		if(eventName===true){
 			// execue immediatley
 			listener();
