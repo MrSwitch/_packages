@@ -312,7 +312,7 @@
 	}
 
 	function addEvent(obj, eventName, listener) { //function to add event
-		if(obj instanceof NodeList ){
+		if(obj instanceof window.NodeList ){
 			for(var i=0;i<obj.length;i++){
 				addEvent( obj[i], eventName, listener );
 			}
