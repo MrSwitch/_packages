@@ -231,17 +231,24 @@
 				if( T < t && T+H > t ){
 	
 					if(toc){
-						var a = toc.getElementsByClassName('active');
-						for(var j=0;j<a.length;j++){
-							a[j].className = '';
-						}
+						var _toc = document.getElementById('toc_'+ref);
 
-						// Activate this one
-						document.getElementById('toc_'+ref).className='active';
+						if(_toc.className!=='active'){
+
+							// Activate this one
+							_toc.className='active';
+
+							var a = toc.getElementsByClassName('active');
+							for(var j=0;j<a.length;j++){
+								if(a[j]!==_toc){
+									a[j].className = '';
+								}
+							}
+						}
 					}
 
 					// Change the current window hash
-					if("history" in window && "replaceState" in window.history){
+					if( "history" in window && "replaceState" in window.history && window.location.hash !== '#'+ref ){
 						history.replaceState({}, document.title, "#"+ref);
 					}
 
