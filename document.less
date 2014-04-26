@@ -566,12 +566,20 @@ table{
 nav.toc{
 	position:fixed;
 	top:0;
-	margin-left:-300px;
+	margin-left:-260px;
 	max-width:200px;
-	width:auto;
-	text-align:right;
+	width:200px;
+	text-align:left;
 	font-weight:300;
 	z-index:-1;
+	background-image: linear-gradient( 90deg, rgba(255,255,255,0) 0%, white 100%);
+	padding-right: 0;
+	font-size:1.3em;
+
+	&:before{
+		content: "\22EE In this Article";
+		font-weight: bold;
+	}
 
 	ul{
 		margin:0;
@@ -579,49 +587,46 @@ nav.toc{
 	}
 
 	li{
-		font-size:100%;
+		font-size:0.8em;
 		list-style:none;
 		padding:4px 0;
 		position:relative;
+		> a{
+			text-decoration: underline;
+		}
+		> ul > li > a{
+			text-decoration: none !important;
+		}
 
 		&.active:after{
 			content:" ";
 			position:absolute;
 			display:inline-block;
-			right:-10px;
+			right:0;
 			top:0.5em;
 			border:10px solid transparent;
 			border-left-width:0;
 			border-right-color:inherit;
 			border-right-width:5px;
 		}
-
-		li{
-			a{
-				font-size:90%;
-			}
-			li a{
-				font-size:80%;
-				font-weight:normal;
-			}
+		&.active{
+			background:white;
+			padding-left:10px;
+			outline:10px white;
 		}
+		.transition( padding-left 0.3s );
 	}
 
 	a{
 		color:inherit;
-		text-decoration: none;
 		display: block;
 		overflow: hidden;
 		text-overflow:ellipsis;
-		.transition( all 0.3s );
+		text-decoration: none;
 		
 		&:hover{
-			color:white;
-			color:rgba(255,255,255,0.9);
+			
 		}
-	}
-	li.active > a{
-		.transform( translateX(-10px) );
 	}
 
 	@media all and (max-width: 1400px) {
