@@ -75,26 +75,26 @@ body{
 .button, button{
 	padding:10px;
 	border-radius: 5px;
-	background-color: buttonface;
+	background-color: #4E5160;
 	display: inline-block;
-	border: 1px outset;
+	border: none;
 	text-decoration: none;
+	color:white;
+	cursor: pointer;
 
 	&:hover{
-		opacity:0.8;
+		opacity:0.9;
+		background:#626574;
 	}
 
 	&.green{
-		color:white;
 		background-color: #10A54A;	
 	}
 	&.blue{
-		color:white;
 		background-color: #0F6AB4;		
 	}
 	&.red{
-		color:white;
-		background-color: #F00;		
+		background-color: #F00;
 	}
 
 	/*
@@ -357,13 +357,6 @@ pre,.pre{
 	+ button{
 		margin-top:-60px;
 		position:absolute;
-		background:rgb(78,81,96);
-		border:none;
-		color:white;
-
-		&:active{
-			background:rgb(98,101,116);
-		}
 	}
 
 	&.tryit, &.tryitoffline{
