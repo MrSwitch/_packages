@@ -4,6 +4,7 @@
 
 
 @body-padding:60px;
+@laptop: ~"all and (max-width: 1440px)";
 @tablet: ~"all and (max-width: 1048px)";
 @mobile: ~"all and (max-width: 650px), screen and (max-device-width: 480px)";
 
@@ -49,9 +50,14 @@ body{
 	&.fullscreen{
 		max-width:none;
 	}
+	@media @laptop {
+		border:none;
+		margin:0 0 0 210px;
+	}
 	@media @tablet {
 		border:none;
 		padding:10px;
+		margin:0;
 	}
 	@media @mobile {
 		margin:0;
@@ -568,6 +574,8 @@ nav.toc{
 	background-image: linear-gradient( 90deg, rgba(255,255,255,0) 0%, white 100%);
 	padding-right: 0;
 	font-size:1.3em;
+	height:100%;
+	overflow:auto;
 
 	&:before{
 		content: "\22EE In this Article";
@@ -606,8 +614,9 @@ nav.toc{
 			background:white;
 			padding-left:10px;
 			outline:10px white;
+			border-left:5px solid;
 		}
-		.transition( padding-left 0.3s );
+		.transition( all 0.3s );
 	}
 
 	a{
@@ -622,13 +631,17 @@ nav.toc{
 		}
 	}
 
-	@media all and (max-width: 1400px) {
+	@media @tablet {
 
 		position: fixed;
 		right:0;
 		margin-left: 0;
 		color:inherit;
 		text-align:left;
+		height:auto;
+		overflow:hidden;
+		width:auto;
+
 	
 		top: 0;
 		z-index: 1;
