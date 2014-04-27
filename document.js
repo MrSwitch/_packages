@@ -34,7 +34,7 @@
 		}
 
 
-		var url = window.location.href, 
+		var url = window.location.href,
 			social_btns = '<a href="'+repo_path+'" class="github-star-button" target="_blank" title="Stars"><i class="icon-github"></i><span class="speeach-bubble"></span></a><span class="period"></span><a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-via="@setData" title="Tweet"><i class="icon-twitter"></i><span class="speeach-bubble"></span></a>';
 
 
@@ -165,9 +165,16 @@
 
 		// TOC
 		var last_depth = 0,
-			headings = document.querySelectorAll('h1,h2');
+			headings = document.querySelectorAll('h1,h2'),
 			toc = document.querySelector('nav.toc'),
 			_toc = toc;
+
+		//
+		// Is there a TOC
+		if(toc){
+			// Lets add a class to the body
+			document.documentElement.className += " toc";
+		}
 
 
 		for(i=0;i<headings.length;i++){
@@ -259,12 +266,13 @@
 		});
 
 		function findPos(obj) {
-			var curleft = curtop = 0;
+			var curleft = 0,
+				curtop = 0;
 			if (obj.offsetParent) {
 				do {
 					curleft += obj.offsetLeft;
 					curtop += obj.offsetTop;
-				} while (obj = obj.offsetParent);
+				} while ((obj = obj.offsetParent));
 			}
 			return [curleft,curtop];
 		}
