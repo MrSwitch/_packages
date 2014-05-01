@@ -169,12 +169,6 @@
 			toc = document.querySelector('nav.toc'),
 			_toc = toc;
 
-		//
-		// Is there a TOC
-		if(toc){
-			// Lets add a class to the body
-			document.documentElement.className += " toc";
-		}
 
 
 		for(i=0;i<headings.length;i++){
@@ -213,6 +207,14 @@
 
 		// Go back
 		toc = _toc;
+
+
+		//
+		// Is there a TOC
+		if(toc){
+			// Lets add a class to the body
+			document.documentElement.className += " toc";
+		}
 
 
 		// Add scroll event listeners

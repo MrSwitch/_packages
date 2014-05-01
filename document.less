@@ -47,12 +47,15 @@ body{
 	position:relative;
 	line-height: 2;
 
+	html.toc > &{
+		border-left:none;
+	}
+
 	&.fullscreen{
 		max-width:none;
 	}
 	@media @laptop {
-		html.toc &{
-			border:none;
+		html.toc > &{
 			margin:0 0 0 210px;
 		}
 	}
@@ -567,7 +570,7 @@ table{
 nav.toc{
 	position:fixed;
 	top:0;
-	margin-left:-260px;
+	margin-left:0;
 	max-width:200px;
 	width:200px;
 	text-align:left;
@@ -577,8 +580,19 @@ nav.toc{
 	font-size:1.3em;
 	height:100%;
 	overflow:auto;
+	opacity:0;
+	.transform(scale(0.5), 0 50%);
 
 	background-image: linear-gradient( 90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 95%, rgba(255,255,255,0) 100%);
+
+	.transition( all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) );
+	
+	html.toc &{
+		margin-left:-260px;
+		opacity:1;
+		.transform(scale(1), 0 50%);
+	}
+
 
 	&:before{
 		content: "\22EE In this Article";
@@ -618,7 +632,7 @@ nav.toc{
 			padding-left:10px;
 			color:white;
 		}
-		.transition( all 0.3s );
+		.transition( ~"background,padding 0.3s" );
 	}
 
 	a{
