@@ -9,6 +9,12 @@
 @mobile: ~"all and (max-width: 650px), screen and (max-device-width: 480px)";
 
 
+// Pallet
+@red: rgb(247, 73, 73);
+@toolbarWidth: 60px;
+@bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+
 * {
 	box-sizing:border-box;
 	-moz-box-sizing:border-box;
@@ -39,7 +45,7 @@ body > form{
 body{
 	border: 1px solid rgb(201, 202, 202);
 	font-family: 'Lato', sans-serif;
-	margin: 0 auto 75px auto;
+	margin: @toolbarWidth auto 75px auto;
 	padding: 35px @body-padding 15px @body-padding;
 	max-width: 1024px;
 	background-color: #FFFFFF;
@@ -56,16 +62,18 @@ body{
 	}
 	@media @laptop {
 		html.toc > &{
-			margin:0 0 0 210px;
+			margin:@toolbarWidth 0 0 210px;
 		}
 	}
 	@media @tablet {
 		border:none;
 		padding:10px;
 		margin:0 !important;
+		margin-top:@toolbarWidth !important;
 	}
 	@media @mobile {
 		margin:0;
+		margin-top:@toolbarWidth;
 		padding:4px;
 	}
 }
@@ -120,8 +128,7 @@ body{
 
 blockquote{
 	@padding:@body-padding + 10px;
-	background-color: rgb(247, 73, 73);
-	color:white;
+	background-color: #eee;
 	border: 1px solid #CCC;
 	padding: 15px @padding;
 	margin: 0 -@padding 35px -@padding;	
@@ -212,6 +219,10 @@ a{
 }
 
 h1,h2,h3,h4{
+
+	&:target{
+		.animate( ~"slideDown 0.3s @{bounce} alternate, fadeIn 0.3s @{bounce}");
+	}
 
 	font-weight:300;
 	text-indent:40px;
@@ -536,28 +547,27 @@ table{
 
 /* TOC */
 .toolbar{
-	position: absolute;
+	//.animate( slideDown 0.3s @bounce );
+	.animate( ~"slideDown 0.3s @{bounce} alternate, fadeIn 0.3s @{bounce}");
+	background-color:@red;
+	color:white;
+	left: 0;
+	margin: 0;
+	padding-left:50px;
+	position: fixed;
+	text-align: right;
 	top: 0;
 	width: 100%;
-	text-align: right;
-	margin: 0;
+	z-index:1;
 
 	.pull-right{
 		padding: 10px;
+		//.animate( fadeIn 2s ease-in );
 	}
 
 	// Fix the body padding offset
-	.body-offset();
-
-	@media @tablet{
-		.pull-right{
-			padding-right:75px;
-		}
-	}
 
 	@media @mobile{
-		position: relative;
-		top:0;
 		.pull-right{
 			float: none;
 			padding-right:10px;
@@ -565,11 +575,15 @@ table{
 	}
 }
 
+.keyframes( slideDown, "{from {transform:translateY(-100px);-webkit-transform: translateY(-100px);} to {transform: translateY(0);-webkit-transform: translateY(0);}");
+.keyframes( slideDown50, "{from {transform:translateY(-50px);-webkit-transform: translateY(-50px);} to {transform: translateY(0);-webkit-transform: translateY(0);}");
+.keyframes( fadeIn, "{from {opacity:0;} to {opacity:1;}");
+
 
 /* TOC */
 nav.toc{
 	position:fixed;
-	top:0;
+	top:50px;
 	margin-left:0;
 	max-width:200px;
 	width:200px;
@@ -585,7 +599,7 @@ nav.toc{
 
 	background-image: linear-gradient( 90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 95%, rgba(255,255,255,0) 100%);
 
-	.transition( all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) );
+	.transition( all 0.3s @bounce );
 	
 	html.toc &{
 		margin-left:-260px;
@@ -629,6 +643,7 @@ nav.toc{
 		}
 		&.active{
 			background:#52b0fa;
+			background-image:linear-gradient(270deg, rgba(0,0,0,0.1) 0, transparent 10px);
 			padding-left:10px;
 			color:white;
 		}
@@ -650,31 +665,49 @@ nav.toc{
 	@media @tablet {
 
 		position: fixed;
-		right:0;
-		margin-left: 0;
+		left:0;
+		margin-left: 0 !important;
 		color:inherit;
 		text-align:left;
 		height:auto;
 		overflow:hidden;
 		width:auto;
-
+		background:none;
 	
+		padding: 0;
 		top: 0;
 		z-index: 1;
-		background-color: white;
-		padding: 10px;
-		border: 1px solid #ccc;
-		box-shadow: -1px 1px 5px #ccc;
 		max-height:100%;
 		overflow: auto;
 
 		&:before{
-			content:"[TOC]";
+			content:"\2261";
+			line-height: 1;
+			vertical-align: middle;
+			width: 1em;
+			font-size: 2em;
+			color: white;
+			display: block;
+			text-align: center;
 		}
-		ul{
+
+		> ul{
+			padding: 10px;
 			display: none;
 		}
 		&:hover{
+			& ~ * {
+				.transition(~"transform 0.3s" );
+				.transition(~"-webkit-transform 0.3s" );
+				.transform(translateX(200px));
+			}
+
+			&:before{
+				color:inherit;
+			}
+			background-color: white;
+			border: 1px solid #ccc;
+			box-shadow: -1px 1px 5px #ccc;
 			overflow:auto;
 			ul{
 				display: block;
@@ -689,7 +722,6 @@ nav.toc{
 			}
 		} 
 	}
-
 }
 
 
@@ -724,10 +756,10 @@ nav.toc{
 
 
 .icon-github{
-	color:#444;
-	font-style: normal;
+	color: inherit;
 	display: inline-block;
-	font-weight:bold;
+	font-style: normal;
+	font-weight: bold;
 
 	&:after{
 		content:"GitHub";
@@ -735,7 +767,7 @@ nav.toc{
 }
 
 .icon-twitter{
-	.twitter-logo(#444);
+	.twitter-logo(white);
 }
 
 
@@ -756,6 +788,8 @@ nav.toc{
 	color:black;
 	border-radius:15%;
 	padding:5px;
+
+	.transition(all 0.3s @bounce);
 
 	&:before,&:after{
 		position:absolute;
@@ -778,7 +812,8 @@ nav.toc{
 		bottom: 5.5px;
 	}
 	&:empty{
-		display: none;
+		.transform(scale(0.01),50% 50%);
+		opacity:0;
 	}
 }
 
@@ -791,5 +826,8 @@ nav.toc{
 	margin:0 20px;
 	&:after{
 		content: "\022C5";
+	}
+	@media @mobile{
+		margin:0 2px;
 	}
 }

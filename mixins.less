@@ -23,6 +23,14 @@
     animation-delay: @val;
 }
 
+.keyframes(@identifier: slidein, @animation: ~"{0%, 50%, 100% { opacity: 0; } 25%, 75% {opacity: 0 }") {
+  .webkit { content: ~"''; } @-webkit-keyframes @{identifier} @{animation}"}
+     .moz { content: ~"''; }    @-moz-keyframes @{identifier} @{animation}"}
+      .ms { content: ~"''; }     @-ms-keyframes @{identifier} @{animation}"}
+       .o { content: ~"''; }      @-o-keyframes @{identifier} @{animation}"}
+     .key { content: ~"''; }         @keyframes @{identifier} @{animation}"}
+}
+
 // Transform MIXIN
 .transform (@val;@origin:0 0) {
 	-webkit-transform: @val;
@@ -45,6 +53,8 @@
 	-o-transition: @val;
 	transition: @val;
 }
+
+
 
 // FlexBox Mixin
 .flexBoxPack (){

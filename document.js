@@ -175,10 +175,11 @@
 			var tag = headings[i];
 			// Create
 			var depth = parseInt(tag.tagName.match(/[0-9]/)[0], 10),
-				text = (tag.innerText||tag.innerHTML),
+				text = (tag.innerText||tag.textContent||tag.innerHTML),
 				ref = text.toLowerCase().replace(/\s/g,'-').replace(/[^a-z0-9\_\-]/g, '');
 
 			// Add anchor
+			tag.id = ref;
 			tag.insertBefore(create('a',{name:ref, href:"#" +ref, "class":"anchor"}),tag.firstChild);
 
 			if(toc){
