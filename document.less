@@ -696,11 +696,12 @@ nav.toc{
 			padding: 10px;
 			display: none;
 		}
-		.transform(translate3d(0,0,0));
+
 		&:hover{
 			.animate(fadeIn 0.5s);
+			background-color:#eee;
+			background-image:linear-gradient(270deg, rgba(0,0,0,0.05) 0, transparent 5px);
 			overflow:auto;
-			padding-right:5px;
 			& ~ * {
 				.transition(~"transform 0.3s" );
 				.transition(~"-webkit-transform 0.3s" );
@@ -709,10 +710,12 @@ nav.toc{
 
 			&:before{
 				color:inherit;
+				width: 100%;
+				background-color:#ddd;
 			}
 			> ul{
-				box-shadow: -1px 1px 5px #ccc;
 				display: block;
+				padding-right:0;
 			}
 
 		}
