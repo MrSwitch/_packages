@@ -689,13 +689,18 @@ nav.toc{
 			color: white;
 			display: block;
 			text-align: center;
+			height:50px;
 		}
 
 		> ul{
 			padding: 10px;
 			display: none;
 		}
+		.transform(translate3d(0,0,0));
 		&:hover{
+			.animate(fadeIn 0.5s);
+			overflow:auto;
+			padding-right:5px;
 			& ~ * {
 				.transition(~"transform 0.3s" );
 				.transition(~"-webkit-transform 0.3s" );
@@ -705,13 +710,11 @@ nav.toc{
 			&:before{
 				color:inherit;
 			}
-			background-color: white;
-			border: 1px solid #ccc;
-			box-shadow: -1px 1px 5px #ccc;
-			overflow:auto;
-			ul{
+			> ul{
+				box-shadow: -1px 1px 5px #ccc;
 				display: block;
 			}
+
 		}
 		
 		li,
