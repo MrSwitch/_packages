@@ -46,9 +46,10 @@
 
 		// Add Social buttons to the top
 		if(repo){
+
 			document.body.insertBefore(create('aside',{
 					'class' : 'toolbar',
-					'html' : '<div class="pull-right"><a href="'+repo_path+'" target="_blank">Open Source</a><span class="period"></span>'+ social_btns +' <div class="clearfix"></div></div>'
+					'html' : '<div class="breadcrumbs pull-left"><a href="/">/a dodson</a> <a href="/'+repo+'">'+repo+'</a></div> <div class="pull-right"><a href="'+repo_path+'" target="_blank">Open Source</a><span class="period"></span>'+ social_btns +' <div class="clearfix"></div></div>'
 				}
 			),document.body.firstElementChild);
 		}

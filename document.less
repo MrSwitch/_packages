@@ -550,18 +550,34 @@ table{
 	//.animate( slideDown 0.3s @bounce );
 	.animate( ~"slideDown 0.3s @{bounce} alternate, fadeIn 0.3s @{bounce}");
 	background-color:@red;
+	background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0, transparent 1em);
 	color:white;
 	left: 0;
 	margin: 0;
+	padding: 10px;
 	padding-left:50px;
 	position: fixed;
-	text-align: right;
+	text-align: left;
 	top: 0;
 	width: 100%;
 	z-index:1;
 
+	> * {
+		.animate(~"slideDown 1s");
+	}
+
+	&:after{
+		// Alternative to Box-shadow
+		content: "";
+		border-bottom: 2px solid rgba(255,255,255,0.5);
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		left: 0;
+		bottom: -2px;
+	}
+
 	.pull-right{
-		padding: 10px;
 		//.animate( fadeIn 2s ease-in );
 	}
 
@@ -575,9 +591,22 @@ table{
 	}
 }
 
-.keyframes( slideDown, "{from {transform:translateY(-100px);-webkit-transform: translateY(-100px);} to {transform: translateY(0);-webkit-transform: translateY(0);}");
-.keyframes( slideDown50, "{from {transform:translateY(-50px);-webkit-transform: translateY(-50px);} to {transform: translateY(0);-webkit-transform: translateY(0);}");
+.breadcrumbs{
+	>a:before{
+		content : '/';
+	}
+
+	>a{
+		&:active + a{
+			.animate(~"fadeOut 1s, slideOutRight 1s");
+		}
+	}
+}
+
+.keyframes( slideDown, "{from {transform:translateY(-100px);-webkit-transform: translateY(-100px);}");
+.keyframes( slideOutRight, "{to {transform: translateX(100px);-webkit-transform: translateX(100px);}");
 .keyframes( fadeIn, "{from {opacity:0;} to {opacity:1;}");
+.keyframes( fadeOut, "{ to {opacity:0;}");
 
 
 /* TOC */
@@ -829,6 +858,10 @@ nav.toc{
 
 .pull-right{
 	float:right;
+}
+
+.pull-left{
+	float:left;
 }
 
 .period{
