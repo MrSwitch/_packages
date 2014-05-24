@@ -595,13 +595,18 @@ table{
 }
 
 .breadcrumbs{
-	>a:before{
-		content : '/';
-	}
 
 	>a{
-		&:active + a{
-			.animate(~"fadeOut 1s, slideOutRight 1s");
+		&:before{
+			content : '/';
+		}
+
+		.transition(all 0.3s ease-in);
+
+		&:hover ~ a{
+			.transition(all 1s ease-in);
+			.transform(translateX(50px));
+			.opacity(0);
 		}
 	}
 }
