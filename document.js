@@ -47,7 +47,7 @@
 		));
 
 		// Add Social buttons to the top
-		if(paths.length){
+		if(repo){
 
 			var breadcrumbs = '';
 
