@@ -219,8 +219,24 @@
 		}
 
 
+		var _prevScrollTop = document.body.scrollTop;
+
 		// Add scroll event listeners
 		addEvent(window, 'scroll', function(e){
+
+			var scrollTop = Math.max(document.body.scrollTop,0);
+			var scrollingDown = _prevScrollTop < scrollTop;
+			_prevScrollTop = scrollTop;
+
+			// Add a class to the documentElement describing the direction of the scroll
+			var clist = document.documentElement.classList;
+			if(clist){
+				clist.add( scrollingDown ? 'scrolledDown' : 'scrolledUp' );
+				clist.remove( !scrollingDown ? 'scrolledDown' : 'scrolledUp' );
+			}
+
+
+
 			// from the list of items
 			// find the one which is in view on the page
 			var T = window.scrollY || window.pageYOffset,
@@ -249,7 +265,7 @@
 							// Activate this one
 							_toc.className='active';
 
-							var a = toc.getElementsByClassName('active');
+							var a = toc.querySelectorAll('.active');
 							for(var j=0;j<a.length;j++){
 								if(a[j]!==_toc){
 									a[j].className = '';

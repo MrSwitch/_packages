@@ -547,11 +547,12 @@ table{
 
 /* TOC */
 .toolbar{
-	//.animate( slideDown 0.3s @bounce );
 	.animate( ~"slideDown 0.3s @{bounce} alternate, fadeIn 0.3s @{bounce}");
 	background-color:@red;
 	background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0, transparent 1em);
 	color:white;
+	display: flex;
+	justify-content: space-between;
 	left: 0;
 	margin: 0;
 	padding: 10px;
@@ -584,9 +585,11 @@ table{
 	// Fix the body padding offset
 
 	@media @mobile{
-		.pull-right{
-			float: none;
-			padding-right:10px;
+
+		.transition(-webkit-transform 1s);
+		.transition(transform 1s);
+		.scrolledDown &{
+			.transform(translateY(-100px));
 		}
 	}
 }
@@ -710,6 +713,7 @@ nav.toc{
 		overflow: auto;
 
 		&:before{
+			background-color: rgba(247, 73, 73, 0.3);
 			content:"\2261";
 			line-height: 1;
 			vertical-align: middle;
@@ -727,8 +731,8 @@ nav.toc{
 		}
 
 		& ~ * {
-			.transition(~"transform 0.3s" );
-			.transition(~"-webkit-transform 0.3s" );
+			.transition(-webkit-transform 0.3s);
+			.transition(transform 0.3s);
 		}
 
 		&:hover{
