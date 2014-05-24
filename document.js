@@ -27,9 +27,11 @@
 
 		var pres, i;
 
-		var repo_path, repo = (window.location.pathname||'').match(/[^\/]+/);
+		var repo_path,
+			paths = (window.location.pathname||'').replace(/^\/|\/[^\/]*$/g,'').split(/\//),
+			repo = paths[0];
+
 		if(repo){
-			repo = repo[0];
 			repo_path = "https://github.com/MrSwitch/"+repo;
 		}
 
@@ -40,22 +42,30 @@
 
 		// Add Footer link to repo
 		document.body.appendChild(create('footer',{
-				html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a> '+ (repo?'<span class="period"></span><a href="'+repo_path+'">Source and Comments on GitHub</a> <div class="pull-right">'+ social_btns +'<div class="clearfix"></div></div>':'')
+				html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a> '+ (repo_path?'<span class="period"></span><a href="'+repo_path+'">Source and Comments on GitHub</a> <div class="pull-right">'+ social_btns +'<div class="clearfix"></div></div>':'')
 			}
 		));
 
 		// Add Social buttons to the top
-		if(repo){
+		if(paths.length){
+
+			var breadcrumbs = '';
+
+			if([].map){
+				breadcrumbs = paths.map( function(val, index){
+					return '<a href="/'+ paths.slice(0,index+1).join('/') +'/">'+ val +'</a>';
+				}).join(' ');
+			}
 
 			document.body.insertBefore(create('aside',{
 					'class' : 'toolbar',
-					'html' : '<div class="breadcrumbs pull-left"><a href="/">/a dodson</a> <a href="/'+repo+'">'+repo+'</a></div> <div class="pull-right"><a href="'+repo_path+'" target="_blank">Open Source</a><span class="period"></span>'+ social_btns +' <div class="clearfix"></div></div>'
+					'html' : '<div class="breadcrumbs pull-left"><a href="/">Andrew Dodson</a> '+breadcrumbs+'</div> <div class="pull-right"><a href="'+repo_path+'" target="_blank">Open Source</a><span class="period"></span>'+ social_btns +' <div class="clearfix"></div></div>'
 				}
 			),document.body.firstElementChild);
 		}
 
 		// Repo
-		if(repo){
+		if(repo_path){
 
 			// Install the twitter widget
 			// Probably could make this a little more ajaxy
