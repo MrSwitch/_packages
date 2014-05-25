@@ -72,7 +72,7 @@
 			jsonp('http://urls.api.twitter.com/1/urls/count.json?url='+encodeURIComponent(url),function(r){
 				// Add value to twitter icon
 				each('.twitter-share-button span.speeach-bubble', function(){
-					this.innerHTML = r.count;
+					this.innerHTML = r.count || '';
 				});
 			});
 
@@ -82,7 +82,7 @@
 				// Add value to twitter icon
 				// Add value to twitter icon
 				each('.github-star-button span.speeach-bubble', function(){
-					this.innerHTML = r.data.watchers;
+					this.innerHTML = r.data.watchers || '';
 				});
 			});
 		}

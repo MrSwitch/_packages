@@ -556,12 +556,19 @@ table{
 	left: 0;
 	margin: 0;
 	padding: 10px;
-	padding-left:50px;
 	position: fixed;
 	text-align: left;
 	top: 0;
 	width: 100%;
 	z-index:1;
+
+	// Give the first child a little padding
+	> :first-child{
+		padding-left:50px;
+	}
+	> :last-child{
+		text-align:right;
+	}
 
 	> * {
 		.animate(slideInDown 1s);
@@ -578,14 +585,10 @@ table{
 		bottom: -2px;
 	}
 
-	.pull-right{
-		//.animate( fadeIn 2s ease-in );
-	}
-
 	// Fix the body padding offset
 
 	@media @mobile{
-
+		flex-flow:column;
 		.transition(-webkit-transform 1s);
 		.transition(transform 1s);
 		.scrolledDown &{
@@ -806,7 +809,7 @@ nav.toc{
 	color: inherit;
 	display: inline-block;
 	font-style: normal;
-	font-weight: bold;
+	text-decoration: inherit;
 
 	&:after{
 		content:"GitHub";
