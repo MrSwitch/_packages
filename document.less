@@ -661,8 +661,9 @@ nav.toc{
 	li{
 		font-size:0.8em;
 		list-style:none;
-		padding:4px 0;
 		position:relative;
+		.transition( ~"background,padding 0.3s" );
+
 		> a{
 			text-decoration: underline;
 		}
@@ -687,7 +688,6 @@ nav.toc{
 			padding-left:10px;
 			color:white;
 		}
-		.transition( ~"background,padding 0.3s" );
 	}
 
 	a{
@@ -696,7 +696,8 @@ nav.toc{
 		overflow: hidden;
 		text-overflow:ellipsis;
 		text-decoration: none;
-		
+		padding: 4px 10px;
+
 		&:hover{
 			
 		}
@@ -740,7 +741,6 @@ nav.toc{
 		}
 
 		> ul{
-			padding: 10px;
 			display: none;
 		}
 
