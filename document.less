@@ -400,7 +400,7 @@ pre,.pre{
 }
 
 script.pre{
-	&:not([type="text/html"]):not(:empty){
+	&:not(:empty){
 		&:after{
 			display: block;
 			content:"</script>";
@@ -409,6 +409,16 @@ script.pre{
 
 		&:before{
 			content:"<script>";
+			color:#a4a4a5;
+		}
+	}
+
+	&[type]{
+		&:after{
+			content:none;
+		}
+		&:before{
+			content:"<" attr(type) ">";
 			color:#a4a4a5;
 		}
 	}
