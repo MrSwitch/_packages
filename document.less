@@ -456,12 +456,28 @@ link.pre:after{
 /**
  * Table, compatibility
  */
-table{
+table, .table{
 	border-collapse: collapse;
 	border-spacing: 0;
 	width:100%;
 	background-color:inherit;
 }
+.table{
+	display:table;
+}
+.table-header{
+	display:table-header-group;
+}
+.table-footer{
+	display:table-footer-group;
+}
+.table-body{
+	display:table-row-group;
+}
+.table-row{
+	display:table-row;
+}
+
 	/** BROWSER LOGO's */
 	table thead th div{
 		margin:0 auto;
@@ -492,33 +508,45 @@ table{
 	}
 	/** EOF BROWSER LOGO's */
 
-	tr.break th{
-		background-color:#f8f8f8;
-	}
-	tr.break th:first-child{
-		border-top:0;
-		border-bottom:0;
-		border-right:0;
-		vertical-align:middle;
-	}
-	tr.break th:last-child{
-		border-left:0;
+	tr, .table-row{
+
+		&.break{
+			th, .table-header & .table-cell{
+				background-color:#f8f8f8;
+			}
+
+			&:first-child{
+				border-top:0;
+				border-bottom:0;
+				border-right:0;
+				vertical-align:middle;
+			}
+
+			&:last-child{
+				border-left:0;
+			}
+		}
+
 	}
 
-	td,th{
+	td,th,.table-cell{
 		text-align:left;
 		border-bottom:1px solid #D2D2D2;
 		padding:4px 10px 4px 6px;
 		vertical-align: top;
 	}
-	thead td,th{
+
+	thead td,th,.table-header .table-cell{
 		border-bottom-width:3px;
 	}
-		table td pre{
-			margin:0;
-			padding:0;
-			background-color:transparent;
-			border:none;
+		table td, .table-cell{
+
+			pre{
+				margin:0;
+				padding:0;
+				background-color:transparent;
+				border:none;
+			}
 		}
 
 		td.yes, td.no{
