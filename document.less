@@ -69,7 +69,6 @@ body{
 	@media @mobile {
 		margin:0;
 		margin-top:@toolbarWidth;
-		padding:4px;
 	}
 }
 
@@ -275,8 +274,9 @@ i{
 		margin:0;
 	}
 	h2{
-		margin-left:0;
-		margin-right:0;
+		margin-left: -10px;
+		margin-right: -10px;
+		max-width: none;
 	}
 	blockquote{
 		box-shadow: 0 20px 0 -10px #aaa;
@@ -292,7 +292,8 @@ i{
 		text-indent: 0;
 	}
 	h2{
-		text-indent: 10px;
+		text-indent: 0;
+		padding:10px;
 	}
 	pre,.pre{
 		overflow-x:auto;
