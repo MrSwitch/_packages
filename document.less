@@ -331,10 +331,13 @@ pre,.pre{
 	background-color:#f4f4f4;
 	border:1px solid #e4e4e4;
 	border-left-width:10px;
-	white-space:pre-wrap;
+	white-space:pre;
 	padding: 15px;
 	margin: 0 0 35px 0;	
 	max-width:100%;
+	text-overflow: ellipsis;
+	overflow: auto;
+	word-wrap: normal;
 
 	-webkit-tab-size:2;
 	-moz-tab-size:2;
@@ -342,6 +345,11 @@ pre,.pre{
 	-o-tab-size:2;
 	tab-size:2;
 
+	@media @mobile{
+		margin: 0 -10px;
+		width: auto;
+		max-width: none;
+	}
 
 	&[title]{
 		&.before,&:before{
@@ -781,6 +789,12 @@ nav.toc{
 		overflow:hidden;
 		width:auto;
 		background:none;
+		bottom:auto;
+		padding: 0;
+		top: 0;
+		z-index: 1;
+		max-height:100%;
+		overflow: auto;
 
 		> ul > li{
 			.animate(none);
@@ -789,12 +803,6 @@ nav.toc{
 				display: none;
 			}
 		}
-	
-		padding: 0;
-		top: 0;
-		z-index: 1;
-		max-height:100%;
-		overflow: auto;
 
 		&:before{
 
