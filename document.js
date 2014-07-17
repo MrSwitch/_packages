@@ -23,7 +23,7 @@
 	var loaded = document.readyState === 'complete';
 
 	// Insert on Document Load
-	addEvent(document, loaded || "DOMContentLoaded", function(){
+	addEvent(window, "load", function(){
 
 		var pres, i;
 
@@ -177,10 +177,12 @@
 		// TOC
 		var last_depth = 0,
 			headings = document.querySelectorAll('h1,h2'),
-			toc = document.querySelector('nav.toc'),
-			_toc = toc;
+			toc = document.querySelector('nav.toc');
 
-
+		var ul;
+		if(toc){
+			ul = create('ul');
+		}
 
 		for(i=0;i<headings.length;i++){
 			var tag = headings[i];
@@ -193,39 +195,22 @@
 			tag.id = ref;
 			tag.insertBefore(create('a',{name:ref, href:"#" +ref, "class":"anchor"}),tag.firstChild);
 
-			if(toc){
-
-				var li = create('li', {html: create('a', {href:"#" +ref, text: text }), id : "toc_"+ref});
-
-				if(last_depth < depth){
-					var ul = create('ul');
-					toc.appendChild(ul);
-					ul.appendChild(li);
-				}
-				else if (last_depth > depth){
-					insertAfter(li, toc.parentNode.parentNode);
-				}
-				else{
-					insertAfter(li,toc);
-				}
-
-				if(toc){
-					toc = li;
-				}
-
-				last_depth = depth;
+			if( ul ){
+				ul.appendChild( create('li', {html: create('a', {href:"#" +ref, text: text, "class": tag.tagName }), id : "toc_"+ref} ));
 			}
 		}
-
-		// Go back
-		toc = _toc;
 
 
 		//
 		// Is there a TOC
 		if(toc){
-			// Lets add a class to the body
-			document.documentElement.className += " toc";
+
+			toc.appendChild(ul);
+
+			setTimeout(function(){
+				// Lets add a class to the body
+				document.documentElement.className += " toc";
+			});
 		}
 
 
