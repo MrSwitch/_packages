@@ -59,12 +59,20 @@ body{
 	position:relative;
 	line-height: 2;
 
-	html.toc > &{
-		border-left:none;
-	}
-
 	&.fullscreen{
 		max-width:none;
+	}
+	@media @laptop {
+		html.toc > &{
+			.transition(all 1s);
+			margin-right:0 !important;
+			padding:60px;
+			width:80%;
+			> nav.toc{
+				.transition(all 1s);
+				width:20%;
+			}
+		}
 	}
 	@media @tablet {
 		border:none;
