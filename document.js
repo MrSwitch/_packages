@@ -5,6 +5,10 @@
 
 (function(window, document){
 
+	// Touch exists?
+	document.documentElement.className += (' ' + ( "ontouchstart" in window ? '' : 'no-') + 'touch');
+
+
 	// fix HTML5 in IE
 	var a = "header,section,datalist,option,footer,nav,menu,aside,article,style,script".split(",");
 	for( var i=0;i<a.length;i++){
@@ -39,13 +43,6 @@
 		var url = window.location.href,
 			social_btns = '<a href="'+repo_path+'" class="github-star-button" target="_blank" title="Stars"><i class="icon-github"></i><span class="speeach-bubble"></span></a><span class="period"></span><a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-via="@setData" title="Tweet"><i class="icon-twitter"></i><span class="speeach-bubble"></span></a>';
 
-
-		// Add Footer link to repo
-		document.body.appendChild(create('footer',{
-				html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a>'
-			}
-		));
-
 		// Add Social buttons to the top
 		if(repo){
 
@@ -62,6 +59,14 @@
 					'html' : '<div class="breadcrumbs pull-left"><a href="/">Andrew Dodson</a> '+breadcrumbs+'</div> <div class="pull-right"><a href="'+repo_path+'" target="_blank">Open Source</a><span class="period"></span>'+ social_btns +' <div class="clearfix"></div></div>'
 				}
 			),document.body.firstElementChild);
+
+
+			// Add Footer link to repo
+			document.body.appendChild(create('footer',{
+					html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a>'
+				}
+			));
+
 		}
 
 		// Repo
@@ -182,6 +187,15 @@
 		var ul;
 		if(toc){
 			ul = create('ul');
+			var toggle = create('a');
+			addEvent( toc, 'click', function(e){
+				e.stopPropagation();
+				toggleClass(toc, "focus");
+			});
+			addEvent( document, 'click', function(){
+				removeClass(toc, "focus");
+			});
+			toc.appendChild(toggle);
 		}
 
 		for(i=0;i<headings.length;i++){
@@ -363,6 +377,18 @@
 		}
 	}
 
+	function toggleClass(elm, className){
+		if(elm.className.match(className)){
+			removeClass( elm, className );
+		}
+		else{
+			elm.className += ' '+className;
+		}
+	}
+
+	function removeClass(elm, className){
+		elm.className = elm.className.replace(className, '');
+	}
 
 	//
 	// JSONP
