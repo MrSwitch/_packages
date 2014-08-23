@@ -50,13 +50,11 @@ body > form{
 */
 body{
 	font-family: 'Helvetica Neue', Helvetica, sans-serif;
-	background-color: white;
-	margin: @toolbarWidth auto 75px auto;
+	margin: 0 auto 75px auto;
 	padding: 35px @body-padding 15px @body-padding;
 	max-width: @bodyWidth;
 	color: #4E5260;
 	letter-spacing:1px;
-	position:relative;
 	line-height: 2;
 
 	&.fullscreen{
@@ -66,11 +64,13 @@ body{
 		html.toc > &{
 			.transition(all 1s);
 			margin-right:0 !important;
-			padding:60px;
 			width:80%;
 			> nav.toc{
 				.transition(all 1s);
 				width:20%;
+			}
+			h1{
+				text-align: left;
 			}
 		}
 	}
@@ -135,7 +135,7 @@ body{
 }
 
 blockquote{
-	@padding:@body-padding;
+	@padding:50px;
 	background-color: #eee;
 	border: 1px solid #CCC;
 	padding: 15px @padding;
@@ -153,7 +153,8 @@ blockquote{
 
 
 blockquote {
-	box-shadow: 0 8px 5px -5px #aaa;
+	font-style: italic;
+	border:none;
 	p{
 		line-height: inherit;
 	}
@@ -175,15 +176,14 @@ blockquote, body > form{
 
 
 footer{
-	position: absolute;
 	width:100%;
 	bottom: -3em;
 	color:black;
 
 	// Fix the body padding offset
-	.body-offset();
+	font-size: small;
 	text-align: center;
-	margin-top:50px;
+	margin-top: 5em;
 
 	@media @mobile{
 		position: relative;
@@ -221,6 +221,7 @@ a{
 			position: absolute;
 			left: -1em;
 			color: inherit;
+			vertical-align: middle;
 		}
 	}
 }
@@ -235,6 +236,29 @@ h1,h2,h3,h4{
 
 	font-weight:300;
 }
+
+h1{
+	margin-top:2em;
+	padding: 1em 0;
+	font-size:4em;
+	text-align: center;
+
+	&:before{
+		position: absolute;
+		padding:inherit;
+		margin-top:-1em;
+		left: 0;
+		right: 0;
+		height: 2em;
+		background: #EEE;
+		z-index: -1;
+		content:'';
+	}
+	&:first-of-type{
+		margin-top:0;
+	}
+}
+
 
 h2{
 	border-bottom: 1px solid #dcdcdc;
@@ -284,9 +308,6 @@ i{
 		margin-right: -10px;
 		max-width: none;
 	}
-	blockquote{
-		box-shadow: 0 20px 0 -10px #aaa;
-	}	
 }
 
 @media @mobile{
@@ -296,6 +317,7 @@ i{
 	h1{
 		text-align:center;
 		text-indent: 0;
+		font-size: 2em;
 	}
 	h2{
 		text-indent: 0;
@@ -690,19 +712,26 @@ table, .table{
 /* TOC */
 nav.toc{
 
-	bottom:0;
-	position:fixed;
-	top:50px;
+	position:absolute;
+
+	&.float{
+		bottom:0;
+		position:fixed;
+		top:50px;
+	}
+
 	left:0;
 	width:200px;
 	width:calc(~"50% - 512px");
+	max-width:250px;
 	text-align:left;
 	font-weight:300;
-	z-index:-1;
+	z-index:0;
 	padding-right: 0;
 	font-size:1.3em;
 	overflow:auto;
-	background-image: linear-gradient( 90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 95%, rgba(255,255,255,0) 100%);
+//	background-image: linear-gradient( 90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 95%, rgba(255,255,255,0) 100%);
+	background-color:#eee;
 
 	//.transition( all 0.3s @bounce );
 
@@ -794,7 +823,7 @@ nav.toc{
 		background:none;
 		bottom:auto;
 		padding: 0;
-		top: 0;
+		top: 0 !important;
 		z-index: 1;
 		max-height:100%;
 		overflow: auto;

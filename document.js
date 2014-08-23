@@ -227,10 +227,11 @@
 			});
 		}
 
+		// Listen to scroll direction
 
 		var _prevScrollTop = document.body.scrollTop;
 
-		// Add scroll event listeners
+		// Listen to scroll direction
 		addEvent(window, 'scroll', function(e){
 
 			var scrollTop = Math.max(document.body.scrollTop,0);
@@ -243,8 +244,11 @@
 				clist.add( scrollingDown ? 'scrolledDown' : 'scrolledUp' );
 				clist.remove( !scrollingDown ? 'scrolledDown' : 'scrolledUp' );
 			}
+		});
 
 
+		// Listen to scroll navigation position
+		addEvent(window, 'scroll', function(e){
 
 			// from the list of items
 			// find the one which is in view on the page
@@ -274,6 +278,7 @@
 							// Activate this one
 							_toc.className='active';
 
+							// Unmark any list items marked active
 							var a = toc.querySelectorAll('.active');
 							for(var j=0;j<a.length;j++){
 								if(a[j]!==_toc){
@@ -294,18 +299,47 @@
 			}
 		});
 
-		function findPos(obj) {
-			var curleft = 0,
-				curtop = 0;
-			if (obj.offsetParent) {
-				do {
-					curleft += obj.offsetLeft;
-					curtop += obj.offsetTop;
-				} while ((obj = obj.offsetParent));
-			}
-			return [curleft,curtop];
+
+		// If toc
+		if(!toc){
+			return;
 		}
+
+		// Add a class to the documentElement describing the direction of the scroll
+		var clist = toc.classList;
+		if(!clist){
+			return;
+		}
+
+		// Get items that need to be static, and then float
+		var tocY = findPos(toc)[1];
+
+		// Offset Parent
+		
+		addEvent(window, 'scroll', function(e){
+			var sY = window.scrollY || window.pageYOffset;
+			if( sY > tocY ){
+				clist.add( 'float' );
+			}
+			else{
+				clist.remove('float');
+			}
+		});
 	});
+
+
+	// Find position of an element
+	function findPos(obj) {
+		var curleft = 0,
+			curtop = 0;
+		if (obj.offsetParent) {
+			do {
+				curleft += obj.offsetLeft;
+				curtop += obj.offsetTop;
+			} while ((obj = obj.offsetParent));
+		}
+		return [curleft,curtop];
+	}
 
 	//
 	// Insert After
