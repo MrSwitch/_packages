@@ -58,7 +58,7 @@
 					'class' : 'toolbar',
 					'html' : '<div class="breadcrumbs pull-left"><a href="/">Andrew Dodson</a> '+breadcrumbs+'</div> <div class="pull-right"><a href="'+repo_path+'" target="_blank">Open Source</a><span class="period"></span>'+ social_btns +' <div class="clearfix"></div></div>'
 				}
-			),document.body.firstElementChild);
+			),document.body.firstElementChild||document.body.firstChild);
 
 
 			// Add Footer link to repo
