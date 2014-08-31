@@ -637,13 +637,14 @@ table, .table{
 	overflow:hidden;
 	overflow-x: auto;
 
-	// Give the first child a little padding
-	> :first-child{
-		padding-left:40px;
-	}
 	> :last-child{
 		text-align:right;
 		margin-left:20px;
+	}
+	// Give the first child a little padding
+	> :first-child{
+		text-align:left;
+		padding-left:40px;
 	}
 
 	> * {

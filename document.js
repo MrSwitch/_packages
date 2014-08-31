@@ -32,54 +32,56 @@
 		var pres, i;
 
 		var repo_path,
-			paths = (window.location.pathname||'').replace(/^\/|\/[^\/]*$/g,'').split(/\//),
+			paths = (window.location.pathname||'').replace(/^\/|\/$/g,'').split(/\//),
 			repo = paths[0];
 
-		if(repo){
-			repo_path = "https://github.com/MrSwitch/"+repo;
-		}
-
-
 		var url = window.location.href,
-			social_btns = '<a href="'+repo_path+'" class="github-star-button" target="_blank" title="Stars"><i class="icon-github"></i><span class="speeach-bubble"></span></a><span class="period"></span><a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-via="@setData" title="Tweet"><i class="icon-twitter"></i><span class="speeach-bubble"></span></a>';
+			social_btns = [],
+			breadcrumbs = ['<a href="http://adodson.com/">Andrew Dodson</a>'];
 
-		// Add Social buttons to the top
-		if(repo){
+		each( paths, function(val, index){
+			if(!val) return;
+			breadcrumbs.push( '<a href="/'+ paths.slice(0,index+1).join('/') +'/">'+ val +'</a>' );
+		});
 
-			var breadcrumbs = '';
+		if( repo ){
 
-			if([].map){
-				breadcrumbs = paths.map( function(val, index){
-					return '<a href="/'+ paths.slice(0,index+1).join('/') +'/">'+ val +'</a>';
-				}).join(' ');
-			}
-
-			document.body.insertBefore(create('aside',{
-					'class' : 'toolbar',
-					'html' : '<div class="breadcrumbs pull-left"><a href="/">Andrew Dodson</a> '+breadcrumbs+'</div> <div class="pull-right"><a href="'+repo_path+'" target="_blank">Open Source</a><span class="period"></span>'+ social_btns +' <div class="clearfix"></div></div>'
-				}
-			),document.body.firstElementChild||document.body.firstChild);
-
-
-			// Add Footer link to repo
-			document.body.appendChild(create('footer',{
-					html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a>'
-				}
-			));
-
+			repo_path = "https://github.com/MrSwitch/"+repo;
+			social_btns = [
+				'<a href="'+repo_path+'" target="_blank">Open Source</a>',
+				'<a href="'+repo_path+'" class="github-star-button" target="_blank" title="Stars"><i class="icon-github"></i><span class="speeach-bubble"></span></a>',
+			];
 		}
+
+		// Add Twitter
+		// Install the twitter widget
+		social_btns.push('<a href="https://twitter.com/share" class="twitter-share-button" target="_blank" data-via="@setData" title="Tweet"><i class="icon-twitter"></i><span class="speeach-bubble"></span></a>');
+
+		// Probably could make this a little more ajaxy
+		jsonp('http://urls.api.twitter.com/1/urls/count.json?url='+encodeURIComponent(url),function(r){
+			// Add value to twitter icon
+			each('.twitter-share-button span.speeach-bubble', function(){
+				this.innerHTML = r.count || '';
+			});
+		});
+
+
+
+		document.body.insertBefore(create('aside',{
+				'class' : 'toolbar',
+				'html' : '<div class="breadcrumbs pull-left"> '+breadcrumbs.join(' ') +'</div> <div class="pull-right">'+ social_btns.join('<span class="period"></span>') +' <div class="clearfix"></div></div>'
+			}
+		),document.body.firstElementChild||document.body.firstChild);
+
+
+		// Add Footer link to repo
+		document.body.appendChild(create('footer',{
+				html : 'Authored by <a href="http://adodson.com" rel="author">Andrew Dodson</a>'
+			}
+		));
 
 		// Repo
 		if(repo_path){
-
-			// Install the twitter widget
-			// Probably could make this a little more ajaxy
-			jsonp('http://urls.api.twitter.com/1/urls/count.json?url='+encodeURIComponent(url),function(r){
-				// Add value to twitter icon
-				each('.twitter-share-button span.speeach-bubble', function(){
-					this.innerHTML = r.count || '';
-				});
-			});
 
 			// Install the GitHub widget
 			// Probably could make this a little more ajaxy
@@ -446,10 +448,12 @@
 
 
 	function each(matches, callback){
-		matches = document.querySelectorAll(matches);
+		if(typeof(matches)==='string'){
+			matches = document.querySelectorAll(matches);
+		}
 
 		for(var i=0;i<matches.length;i++){
-			callback.call(matches[i]);
+			callback.call(matches[i], matches[i], i );
 		}
 	}
 
