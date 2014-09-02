@@ -32,7 +32,7 @@
 		var pres, i;
 
 		var repo_path,
-			paths = (window.location.pathname||'').replace(/^\/|\/$/g,'').split(/\//),
+			paths = (window.location.pathname||'').replace(/^\/|\/$|\.html?$/g,'').split(/\//),
 			repo = paths[0];
 
 		var url = window.location.href,
