@@ -429,7 +429,8 @@
 	//
 	// JSONP
 	var jsonp_counter = 0;
-	function jsonp(url, callback){
+
+	window.jsonp = function(url, callback){
 		// JSONP
 		// Make the anonymous function. not anonymous
 		var callback_name = 'jsonp_document_' + jsonp_counter++;
@@ -443,7 +444,7 @@
 		script.src = (url+"&callback="+callback_name);
 		// Append
 		sibling.parentNode.insertBefore(script,sibling);
-	}
+	};
 
 
 
